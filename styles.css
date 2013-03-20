@@ -1,0 +1,40 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-image: url(./images/white_carbon.png);
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+}
+
+h2 {
+	width: 100%;
+	position: relative;
+	font-size: 140px;
+	color: #086ca2;
+	font-family: sans; 
+	font-weight: 100;
+	margin-top: 50px;
+}
+
+p {
+	font-size: 22pt;
+	font-family: 'Sintony', sans;
+	color: #333333;
+}
+
+.contacts > p {
+	font-size: 16pt;
+}
+
+.space {
+	height: 120px;
+}
+
+
