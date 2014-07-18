@@ -1,40 +1,65 @@
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 body {
-	background-image: url(./images/white_carbon.png);
+  background-color: #04a0ff;
+  color: #ecf0f1;
+  font-size: 24pt;
 }
-
-.center {
-	margin-left: auto;
-	margin-right: auto;
-	width: 1000px;
+h1 {
+  font-size: 3em;
+  font-family: 'Bubbler One', sans-serif;
 }
-
-h2 {
-	width: 100%;
-	position: relative;
-	font-size: 140px;
-	color: #086ca2;
-	font-family: sans; 
-	font-weight: 100;
-	margin-top: 50px;
+.about {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  padding: 1em;
+  padding-top: 4em;
+  text-align: right;
+  background-color: #04a0ff;
 }
-
-p {
-	font-size: 22pt;
-	font-family: 'Sintony', sans;
-	color: #333333;
+.right {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #0091ea;
+  padding: 7em 0 0 1em;
 }
-
-.contacts > p {
-	font-size: 16pt;
+.right:before {
+  content: ' ';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: url('noise.png');
 }
-
-.space {
-	height: 120px;
+.right ul {
+  display: block;
+  position: relative;
+  margin-bottom: 1em;
+  list-style: none;
 }
-
-
+.right li {
+  display: block;
+  margin-top: 0.5em;
+}
+.right li a {
+  font-family: 'Voltaire', sans-serif;
+  background-color: black;
+  padding: 0.2em;
+  color: white;
+  text-decoration: none;
+  display: inline;
+}
+.right li a:hover {
+  background-color: yellow;
+  color: black;
+}
