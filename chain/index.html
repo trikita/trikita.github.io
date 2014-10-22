@@ -1,0 +1,534 @@
+<!DOCTYPE html><html><head><link href="http://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,700" rel="stylesheet" type="text/css"><link href="styles.css" rel="stylesheet" type="text/css"><style>* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-size: 24px;
+  background-color: white;
+  font-family: 'Crimson Text', serif;
+  font-weight: 400;
+  line-height: 1.5em;
+  color: #000000;
+}
+body p {
+  margin-bottom: 1.5em;
+}
+body p a {
+  color: #673ab7;
+}
+body code,
+body pre {
+  font-family: 'Inconsolata', monospace;
+}
+body h2 {
+  color: #673ab7;
+  font-weight: inherit;
+  font-size: 2em;
+  margin-top: 1.41414em;
+  margin-bottom: 0.5em;
+  line-height: 1.2em;
+}
+body header {
+  color: #673ab7;
+}
+body header h1 {
+  font-size: 7.594em;
+  line-height: 1.5em;
+  font-weight: inherit;
+}
+body header h2 {
+  margin-top: -1.3em;
+  margin-left: 2em;
+  margin-bottom: 2em;
+}
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 25%;
+}
+.sidebar nav {
+  display: in
+		height: 100%;
+}
+.sidebar nav ul {
+  margin: 3.2em 0 0 20%;
+  width: 40%;
+  list-style: none;
+}
+.sidebar nav ul li {
+  list-style: none;
+}
+.sidebar a,
+.sidebar a:visited {
+  text-decoration: none;
+  color: #673ab7;
+  opacity: 40%;
+}
+.sidebar a:before,
+.sidebar a:visited:before {
+  content: "\2023";
+  margin-right: 0.5em;
+  color: rgba(0, 0, 0, 0);
+}
+.sidebar a.active,
+.sidebar a:visited.active {
+  opacity: 100%;
+  color: #673ab7;
+}
+.sidebar a.active:before,
+.sidebar a:visited.active:before {
+  color: #673ab7;
+}
+.content {
+  background-color: #fafafa;
+  display: inline-block;
+}
+.content ul {
+  list-style-type: square;
+  list-style-position: inside;
+  margin-bottom: 1em;
+}
+.content ul code {
+  font-size: 70%;
+  padding: 0.2em 0.5em;
+  vertical-align: top;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 2px;
+  border: 0;
+}
+.content .text {
+  margin-left: 25%;
+  margin-right: 1em;
+}
+.content footer {
+  /*margin-left: -33.33333%;*/
+  color: #fafafa;
+  background-color: #673ab7;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+}
+.content footer p {
+  padding-left: 25%;
+  /*text-align: center;*/
+  margin: 0;
+  /*padding: 1.5em;*/
+  font-size: 0.7em;
+}
+.tabs {
+  padding: 1em;
+  margin-bottom: 1em;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  border-radius: 2px;
+  border: 0;
+}
+.tabs li {
+  display: inline-block;
+  text-align: center;
+}
+.tabs li a {
+  min-width: 6em;
+  padding: 0.5em 1em;
+  color: #673ab7;
+  background-color: #fafafa;
+  text-decoration: none;
+  font-size: 0.75em;
+  border-radius: 2px;
+}
+.tabs li a.active {
+  background-color: #673ab7;
+  color: #fafafa;
+}
+.tabs .code pre {
+  padding: 1em;
+  font-size: 0.66em;
+  line-height: 1.20em;
+}
+.tabs .hidden {
+  display: none;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: white;
+  color: black;
+  -webkit-text-size-adjust: none;
+}
+
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-filter .hljs-argument,
+.hljs-addition,
+.hljs-change,
+.apache .hljs-tag,
+.apache .hljs-cbracket,
+.nginx .hljs-built_in,
+.tex .hljs-formula {
+  color: #888;
+}
+
+.hljs-comment,
+.hljs-template_comment,
+.hljs-shebang,
+.hljs-doctype,
+.hljs-pi,
+.hljs-javadoc,
+.hljs-deletion,
+.apache .hljs-sqbracket {
+  color: #ccc;
+}
+
+.hljs-keyword,
+.hljs-tag .hljs-title,
+.ini .hljs-title,
+.lisp .hljs-title,
+.http .hljs-title,
+.nginx .hljs-title,
+.css .hljs-tag,
+.hljs-winutils,
+.hljs-flow,
+.apache .hljs-tag,
+.tex .hljs-command,
+.hljs-request,
+.hljs-status {
+  font-weight: bold;
+}
+</style><script>function each() {
+	var a = Array.prototype.slice.call(arguments)
+	if (typeof a[0] === 'string') a.unshift(document);
+	Array.prototype.some.call(a[0].querySelectorAll(a[1]), a[2]);
+}
+function prepareTabs(tabs) {
+	each(tabs, 'li > a', function(tab, i) {
+		tab.addEventListener('click', function(e) {
+			e.preventDefault();
+			each(tabs, 'li > a', function(a) { a.className = ''; });
+			each(tabs, '.tabs-content .code', function(content) { content.className = 'code hidden'; });
+			tab.className = 'active';
+			tabs.querySelectorAll('.tabs-content .code')[i].className = 'code';
+		});
+	});
+}
+
+window.onload = function() {
+	each('.tabs', prepareTabs);
+	document.addEventListener('scroll', function(e) {
+		e.preventDefault();
+		each('nav a', function(h) { h.className = '';});
+		each('.content section', function(h, i) {
+			var top = document.body.scrollTop || document.documentElement.scrollTop;
+			if (top < h.offsetTop + h.offsetHeight) {
+				document.querySelectorAll('nav a' )[i].className = 'active';
+				return true;
+			}
+		});
+	});
+};
+</script></head><body><div class="sidebar"><nav><ul><li><a href="#intro">Chain</a></li><li><a href="#java">Java</a></li><li><a href="#javascript">JavaScript</a></li><li><a href="#lua">Lua</a></li><li><a href="#cpp">C++</a></li></ul></nav></div><div class="content"><div class="text"><header><h1>Chain</h1><h2>tiny asynchronous code pipelining</h2></header><section id="intro"><p>Chain is a collection of small code snippets to help you avoid callback hell.</p><p>It helps you to chain your callbacks easily, pass values from one callback to another and to cancel the chain of callbacks if needed. General API is as follows:</p><ul><li>Create a new chain: <code>chain = new Chain()</code></li><li>Add new funtions to the chain: <code>chain.then(f1).then(f2)</code></li><li>Add optional error handler: <code>chain.fail(f)</code></li><li>Start chain execution: <code>chain.done()</code></li></ul><p>Every callback receives the chain instance as its argument which allows you to:</p><ul><li>Pass a value to the next chained callback: <code>c.done(value)</code></li><li>Cancel chain: <code>c.cancel()</code></li><li>Throw an error (in this case an error handler will be called): <code>c.cancel(error)</code></li></ul></section><section id="java"><h2>Java</h2><p>Java version is implemented as a single class and chain can pass values of only one type &lt;T&gt;. You can use containers like Pair&lt;A,B&gt; or Object type if you need more flexibility. Chain error class must implement Throwable.</p><p>Java 8 is not required at all, but it will make writing your callbacks so much easier. Android is supported, too.</p><div class="tabs"><ul><li><a href="javascript:void" class="active">Usage</a></li><li><a href="javascript:void">Chain.java</a></li></ul><div class="tabs-content"><div class="code"><pre><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Example</span> </span>{
+
+	<span class="hljs-keyword">private</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Callback</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
+		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">(T arg, Exception e)</span></span>;
+	}
+	<span class="hljs-comment">// A long-running method to get the Answer to The Ultimate Question of</span>
+	<span class="hljs-comment">// Life, the Universe, and Everything</span>
+	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getAnswer</span><span class="hljs-params">(Callback&lt;Integer&gt; cb)</span> </span>{
+		cb.run(<span class="hljs-number">42</span>, <span class="hljs-keyword">null</span>);
+	}
+	<span class="hljs-comment">// A long-running method to get the actual Question</span>
+	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getQuestion</span><span class="hljs-params">(Callback&lt;String&gt; cb)</span> </span>{
+		cb.run(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">new</span> RuntimeException(<span class="hljs-string">"Oops, the earth has been destroyed"</span>));
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>{
+		<span class="hljs-keyword">new</span> Chain&lt;&gt;().then((c) -&gt; {
+			getAnswer((answer, err) -&gt; {
+				System.out.println(<span class="hljs-string">"Answer is: "</span> + answer);
+				c.done(answer);
+			});
+		}).then((c) -&gt; {
+			getQuestion((question, err) -&gt; {
+				<span class="hljs-keyword">if</span> (err != <span class="hljs-keyword">null</span>) {
+					c.cancel(err);
+				} <span class="hljs-keyword">else</span> {
+					c.done();
+				}
+			});
+		}).fail((c, err) -&gt; {
+			System.out.println(<span class="hljs-string">"Error: "</span> + err);
+		}).done();
+	}
+}
+</pre></div><div class="code hidden"><pre><span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Chain</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
+
+	<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Chainable</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
+		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">(Chain&lt;T&gt; c)</span></span>;
+	}
+	<span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">FailCallback</span>&lt;<span class="hljs-title">T</span>&gt; </span>{
+		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">(Chain&lt;T&gt; c, Throwable err)</span></span>;
+	}
+
+	<span class="hljs-keyword">private</span> T value;
+	<span class="hljs-keyword">private</span> FailCallback&lt;T&gt; failCallback;
+	<span class="hljs-keyword">private</span> Deque&lt;Chainable&lt;T&gt;&gt; queue = <span class="hljs-keyword">new</span> ArrayDeque&lt;Chainable&lt;T&gt;&gt;();
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> Chain&lt;T&gt; <span class="hljs-title">then</span><span class="hljs-params">(Chainable&lt;T&gt; fn)</span> </span>{
+		<span class="hljs-keyword">this</span>.queue.add(fn);
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> Chain&lt;T&gt; <span class="hljs-title">each</span><span class="hljs-params">(Collection&lt;T&gt; a, Chainable&lt;T&gt; fn)</span> </span>{
+		<span class="hljs-keyword">final</span> Iterator&lt;T&gt; iter = a.iterator();
+		<span class="hljs-function"><span class="hljs-keyword">return</span> <span class="hljs-title">then</span><span class="hljs-params">(<span class="hljs-keyword">new</span> Chainable&lt;T&gt;()</span> </span>{
+			<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">(Chain&lt;T&gt; c)</span> </span>{
+				<span class="hljs-keyword">if</span> (iter.hasNext() == <span class="hljs-keyword">false</span>) <span class="hljs-keyword">return</span>;
+				c.value = iter.next();
+				queue.addFirst(<span class="hljs-keyword">this</span>);
+				fn.run(c);
+			}
+		});
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> Chain&lt;T&gt; <span class="hljs-title">fail</span><span class="hljs-params">(FailCallback&lt;T&gt; fn)</span> </span>{
+		<span class="hljs-keyword">this</span>.failCallback = fn;
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">done</span><span class="hljs-params">(T value)</span> </span>{
+		<span class="hljs-keyword">this</span>.value = value;
+		Chainable&lt;T&gt; n = queue.poll();
+		<span class="hljs-keyword">if</span> (n != <span class="hljs-keyword">null</span>) {
+			n.run(Chain.<span class="hljs-keyword">this</span>);
+		}
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">done</span><span class="hljs-params">()</span> </span>{
+		<span class="hljs-keyword">this</span>.done(<span class="hljs-keyword">null</span>);
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">value</span><span class="hljs-params">()</span> </span>{
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.value;
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">cancel</span><span class="hljs-params">(Throwable err)</span> </span>{
+		<span class="hljs-keyword">this</span>.failCallback.run(<span class="hljs-keyword">this</span>, err);
+		<span class="hljs-keyword">this</span>.cancel();
+	}
+
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">cancel</span><span class="hljs-params">()</span> </span>{
+		queue.clear();
+	}
+}
+</pre></div></div></div></section><section id="javascript"><h2>JavaScript</h2><p>Javascript version supports both Node.js and browser (including IE6+)</p><p>There is also a very limited, but very tiny version (tweet-size, 140 bytes). It lacks error and value passing. It's here for historical reasons as it is the very first version of Chain.</p><div class="tabs"><ul><li><a href="javascript:void" class="active">Usage</a></li><li><a href="javascript:void">chain.js</a></li></ul><div class="tabs-content"><div class="code"><pre><span class="hljs-keyword">var</span> chain = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./chain'</span>); <span class="hljs-comment">// In the browser it will be window.chain</span>
+
+<span class="hljs-comment">// A long-running function to get the Answer to The Ultimate Question of</span>
+<span class="hljs-comment">// Life, the Universe, and Everything</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getAnswer</span><span class="hljs-params">(cb)</span> </span>{
+	cb(<span class="hljs-number">42</span>);
+}
+<span class="hljs-comment">// A long-running function to get the actual Question</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getQuestion</span><span class="hljs-params">(cb)</span> </span>{
+	cb(<span class="hljs-literal">null</span>, <span class="hljs-string">'Oops, the earth has been destroyed'</span>);
+}
+
+chain().then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(c)</span> </span>{
+	getAnswer(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(answer, err)</span> </span>{
+		<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'The answer is:'</span>, answer);
+		c.done(answer);
+	});
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(c)</span> </span>{
+	getQuestion(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(question, err)</span> </span>{
+		<span class="hljs-keyword">if</span> (err) {
+			c.cancel(err);
+		} <span class="hljs-keyword">else</span> {
+			<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'The question is:'</span>, question);
+			c.done();
+		}
+	});
+}).fail(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(c, err)</span> </span>{
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Error message:'</span>, err);
+}).done();
+</pre></div><div class="code hidden"><pre><span class="hljs-list">(<span class="hljs-keyword">function</span><span class="hljs-list">()</span> <span class="hljs-collection">{
+	function chain<span class="hljs-list">()</span> <span class="hljs-collection">{
+		var queue = <span class="hljs-collection">[]</span><span class="hljs-comment">;</span>
+		var failcb<span class="hljs-comment">;</span>
+
+		return <span class="hljs-collection">{
+			then: function<span class="hljs-list">(<span class="hljs-keyword">cb</span>)</span> <span class="hljs-collection">{
+				queue.push<span class="hljs-list">(<span class="hljs-keyword">cb</span>)</span><span class="hljs-comment">;</span>
+				return this<span class="hljs-comment">;</span>
+			}</span>,
+			done: function<span class="hljs-list">(<span class="hljs-keyword"><span class="hljs-built_in">val</span></span>)</span> <span class="hljs-collection">{
+				this.value = val<span class="hljs-comment">;</span>
+				var cb = queue.shift<span class="hljs-list">()</span><span class="hljs-comment">;</span>
+				if <span class="hljs-list">(<span class="hljs-keyword">cb</span>)</span> <span class="hljs-collection">{
+					cb<span class="hljs-list">(<span class="hljs-keyword">this</span>)</span><span class="hljs-comment">;</span>
+				}</span>
+			}</span>,
+			fail: function<span class="hljs-list">(<span class="hljs-keyword">cb</span>)</span> <span class="hljs-collection">{
+				failcb = cb<span class="hljs-comment">;</span>
+				return this<span class="hljs-comment">;</span>
+			}</span>,
+			cancel: function<span class="hljs-list">(<span class="hljs-keyword">err</span>)</span> <span class="hljs-collection">{
+				if <span class="hljs-list">(<span class="hljs-keyword">err</span> &amp;&amp; failcb)</span> <span class="hljs-collection">{
+					failcb<span class="hljs-list">(<span class="hljs-keyword">this</span>, err)</span><span class="hljs-comment">;</span>
+				}</span>
+				queue = <span class="hljs-collection">[]</span><span class="hljs-comment">;</span>
+			}</span>,
+		}</span><span class="hljs-comment">;</span>
+	}</span>
+
+	if <span class="hljs-list">(<span class="hljs-keyword">typeof</span> module === <span class="hljs-string">"undefined"</span>)</span> <span class="hljs-collection">{
+		window.chain = chain<span class="hljs-comment">;</span>
+	}</span> else <span class="hljs-collection">{
+		module.exports = chain<span class="hljs-comment">;</span>
+	}</span>
+}</span>)</span><span class="hljs-list">()</span><span class="hljs-comment">;</span>
+</pre></div></div></div></section><section id="lua"><h2>Lua</h2><p>Lua version is very similar to javascript, support all modern Lua versions, including 5.0, 5.1, 5.2 and LuaJIT.</p><div class="tabs"><ul><li><a href="javascript:void" class="active">Usage</a></li><li><a href="javascript:void">chain.lua</a></li></ul><div class="tabs-content"><div class="code"><pre><span class="hljs-keyword">local</span> chain = <span class="hljs-built_in">require</span>(<span class="hljs-string">'chain'</span>)
+
+<span class="hljs-comment">-- A long-running function to get the Answer to The Ultimate Question of</span>
+<span class="hljs-comment">-- Life, the Universe, and Everything</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getanswer</span><span class="hljs-params">(cb)</span></span> cb(<span class="hljs-number">42</span>) <span class="hljs-keyword">end</span>
+<span class="hljs-comment">-- A long-running function to get the actual Question</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getquestion</span><span class="hljs-params">(cb)</span></span> cb(<span class="hljs-keyword">nil</span>, <span class="hljs-string">'Oops, the earth has been destroyed'</span>) <span class="hljs-keyword">end</span>
+
+chain():<span class="hljs-built_in">next</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(c)</span></span>
+	getanswer(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(answer, error)</span></span>
+		<span class="hljs-built_in">print</span>(<span class="hljs-string">'The answer is:'</span>, answer)
+		c:done(answer)
+	<span class="hljs-keyword">end</span>)
+<span class="hljs-keyword">end</span>):<span class="hljs-built_in">next</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(c)</span></span>
+	getquestion(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(question, error)</span></span>
+		<span class="hljs-keyword">if</span> <span class="hljs-built_in">error</span> ~= <span class="hljs-keyword">nil</span> <span class="hljs-keyword">then</span>
+			c:cancel(<span class="hljs-built_in">error</span>)
+		<span class="hljs-keyword">else</span>
+			<span class="hljs-built_in">print</span>(<span class="hljs-string">'The question is:'</span>, question)
+			c:done()
+		<span class="hljs-keyword">end</span>
+	<span class="hljs-keyword">end</span>)
+<span class="hljs-keyword">end</span>):fail(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(c, error)</span></span>
+	<span class="hljs-built_in">print</span>(<span class="hljs-string">'Error message:'</span>, <span class="hljs-built_in">error</span>)
+<span class="hljs-keyword">end</span>):done()
+</pre></div><div class="code hidden"><pre><span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+	<span class="hljs-keyword">local</span> n
+	<span class="hljs-keyword">local</span> queue = {}
+	n = {
+		<span class="hljs-built_in">next</span> = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(self, cb)</span></span> <span class="hljs-built_in">table</span>.insert(queue, cb); <span class="hljs-keyword">return</span> n <span class="hljs-keyword">end</span>,
+		fail = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(self, cb)</span></span> n.failcb = cb; <span class="hljs-keyword">return</span> n <span class="hljs-keyword">end</span>,
+		cancel = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(self, err)</span></span>
+			<span class="hljs-keyword">if</span> err ~= <span class="hljs-keyword">nil</span> <span class="hljs-keyword">and</span> n.failcb ~= <span class="hljs-keyword">nil</span> <span class="hljs-keyword">then</span>
+				n.failcb(n, err)
+			<span class="hljs-keyword">end</span>
+			queue = {}
+		<span class="hljs-keyword">end</span>,
+		each = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(self, a, cb)</span></span>
+			<span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iter</span><span class="hljs-params">(c)</span></span>
+				<span class="hljs-keyword">if</span> #a == <span class="hljs-number">0</span> <span class="hljs-keyword">then</span> <span class="hljs-keyword">return</span> c:done() <span class="hljs-keyword">end</span>
+				<span class="hljs-built_in">table</span>.insert(queue, <span class="hljs-number">1</span>, iter)
+				c.value = <span class="hljs-built_in">table</span>.remove(a, <span class="hljs-number">1</span>)
+				cb(c)
+			<span class="hljs-keyword">end</span>
+			<span class="hljs-keyword">return</span> self:<span class="hljs-built_in">next</span>(iter)
+		<span class="hljs-keyword">end</span>,
+		done = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(self, val)</span></span>
+			n.value = val
+			<span class="hljs-keyword">local</span> cb = <span class="hljs-built_in">table</span>.remove(queue, <span class="hljs-number">1</span>)
+			<span class="hljs-keyword">if</span> cb <span class="hljs-keyword">then</span> cb(n) <span class="hljs-keyword">end</span>
+		<span class="hljs-keyword">end</span>
+	}
+	<span class="hljs-keyword">return</span> n
+<span class="hljs-keyword">end</span>
+</pre></div></div></div></section><section id="cpp"><h2>C++</h2><p>This version uses closures, so your compiler should support C++11. If you want to terminate chain with an error - it should be a child of the std::exception class.</p><div class="tabs"><ul><li><a href="javascript:void" class="active">Usage</a></li><li><a href="javascript:void">chain.hpp</a></li></ul><div class="tabs-content"><div class="code"><pre><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> &lt;iostream&gt;</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> &lt;string&gt;</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> "chain.hpp"</span>
+
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> getAnswer(std::function&lt;<span class="hljs-keyword">void</span>(<span class="hljs-keyword">int</span>)&gt; cb) {
+	cb(<span class="hljs-number">42</span>);
+}
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> getQuestion(std::function&lt;<span class="hljs-keyword">void</span>(<span class="hljs-keyword">const</span> std::<span class="hljs-built_in">string</span>&amp; question, std::exception_ptr)&gt; cb) {
+	cb(<span class="hljs-string">""</span>, std::make_exception_ptr(std::runtime_error(<span class="hljs-string">"Oops, the earth has been destroyed"</span>)));
+}
+
+<span class="hljs-keyword">int</span> main() {
+	Chain&lt;<span class="hljs-keyword">int</span>&gt;().then([](Chain&lt;<span class="hljs-keyword">int</span>&gt;&amp; c) {
+		getAnswer([&amp;](<span class="hljs-keyword">int</span> answer) {
+			std::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Answer: "</span> &lt;&lt; answer &lt;&lt; std::endl;
+			c.done(answer);
+		});
+	}).then([](Chain&lt;<span class="hljs-keyword">int</span>&gt;&amp; c) {
+		getQuestion([&amp;](<span class="hljs-keyword">const</span> std::<span class="hljs-built_in">string</span>&amp; question, std::exception_ptr err) {
+			<span class="hljs-keyword">if</span> (err) {
+				c.cancel(err);
+			} <span class="hljs-keyword">else</span> {
+				c.done(); <span class="hljs-comment">// Pass current chain value</span>
+			}
+		});
+	}).fail([](Chain&lt;<span class="hljs-keyword">int</span>&gt;&amp; c, std::exception_ptr err) {
+		<span class="hljs-keyword">try</span> {
+			std::rethrow_exception(err);
+		} <span class="hljs-keyword">catch</span>(std::exception&amp; e) {
+		std::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Error: "</span> &lt;&lt; e.what() &lt;&lt; std::endl;
+		}
+	}).done();
+	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+
+</pre></div><div class="code hidden"><pre><span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> &lt;stdexcept&gt;</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> &lt;queue&gt;</span>
+<span class="hljs-preprocessor">#<span class="hljs-keyword">include</span> &lt;functional&gt;</span>
+
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> T = <span class="hljs-keyword">void</span>*&gt; <span class="hljs-keyword">class</span> Chain {
+	T val;
+	std::function&lt;<span class="hljs-keyword">void</span> (Chain&lt;T&gt;&amp;, <span class="hljs-keyword">const</span> std::exception_ptr)&gt; failcb;
+	std::<span class="hljs-stl_container"><span class="hljs-built_in">deque</span>&lt;<span class="hljs-built_in">std</span>::function&lt;<span class="hljs-keyword">void</span> (Chain&lt;T&gt;</span>&amp;)&gt;&gt; <span class="hljs-built_in">queue</span>;
+
+<span class="hljs-keyword">public</span>:
+	Chain&amp; then(std::function&lt;<span class="hljs-keyword">void</span> (Chain&lt;T&gt;&amp;)&gt; cb) {
+		<span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">queue</span>.emplace_back(cb);
+		<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
+	}
+
+	Chain&amp; fail(std::function&lt;<span class="hljs-keyword">void</span> (Chain&lt;T&gt;&amp;, std::exception_ptr)&gt; cb) {
+		<span class="hljs-keyword">this</span>-&gt;failcb = cb;
+		<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;
+	}
+
+	<span class="hljs-keyword">void</span> done() {
+		<span class="hljs-keyword">this</span>-&gt;done(val);
+	}
+
+	<span class="hljs-keyword">void</span> done(T val) {
+		<span class="hljs-keyword">this</span>-&gt;val = val;
+		<span class="hljs-keyword">auto</span> cb = <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">queue</span>.front();
+		<span class="hljs-keyword">if</span> (cb != NULL) {
+			<span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">queue</span>.pop_front();
+			cb(*<span class="hljs-keyword">this</span>);
+		}
+	}
+
+	T value() {
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;val;
+	}
+
+	<span class="hljs-keyword">void</span> cancel() {
+		<span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">queue</span>.clear();
+	}
+
+	<span class="hljs-keyword">void</span> cancel(std::exception_ptr err) {
+		<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>-&gt;failcb != NULL) {
+			<span class="hljs-keyword">this</span>-&gt;failcb(*<span class="hljs-keyword">this</span>, err);
+		}
+		<span class="hljs-keyword">this</span>-&gt;cancel();
+	}
+};
+</pre></div></div></div></section></div><footer><p>Special thanks to Anton Tanchuk, Jason LeBlanc and other contributors.</p><p>Code licensed under the MIT license. Sources repository is available at http://bitbucket.org/trikita/chain</p></footer></div><a href="https://bitbucket.org/trikita/chain" style="position:absolute;z-index:10000;top:0;right:0;"><img src="//bitbucket.org/zgramana/bitbucket-ribbons/raw/988dffc5fbeb/png/bitbucket-ribbon-gray.png"></a></body></html>

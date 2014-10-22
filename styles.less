@@ -39,7 +39,7 @@ h1 {
 	width: 50%;
 	height: 100%;
 	background-color: @bgcolor2;
-	padding: 7em 0 0 1em;
+	padding: 4em 0 0 1em;
 
 	&:before {
 		content: ' ';
@@ -71,6 +71,37 @@ h1 {
 			&:hover {
 				background-color: yellow;
 				color: black;
+			}
+		}
+	}
+}
+
+ul.skewed {
+	overflow: hidden;
+	display: inline-block;
+	li {
+		display: inline-block;
+		a {
+			display: inline-block;
+			-webkit-transform: skew(-20deg);
+			transform: skew(-20deg);
+			padding: 0.2em 0.5em;
+			span {
+				display: inline-block;
+				-webkit-transform: skew(20deg);
+				transform: skew(20deg);
+			}
+		}
+		&:first-child {
+			a {
+				margin-left: -2em;
+				padding-left: 2.5em;
+			}
+		}
+		&:last-child {
+			a {
+				margin-right: -2em;
+				padding-right: 2.5em;
 			}
 		}
 	}
