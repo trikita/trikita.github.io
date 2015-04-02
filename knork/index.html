@@ -1,140 +1,229 @@
-<!DOCTYPE html><html><head><link href="http://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet" type="text/css"><link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,700" rel="stylesheet" type="text/css"><link href="styles.css" rel="stylesheet" type="text/css"><style>/*
-
-Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
-
-*/
-
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: white;
-  color: black;
-  -webkit-text-size-adjust: none;
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="http://fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet" type="text/css">
+		<link href="http://fonts.googleapis.com/css?family=Crimson+Text:400,700" rel="stylesheet" type="text/css">
+		<link href="styles.css" rel="stylesheet" type="text/css">
+		<link href="ascetic.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<ul>
+<li><a href="#markdown-header-knork">Knork</a></li>
+<li><a href="#markdown-header-download">Download</a></li>
+<li><a href="#markdown-header-api">API</a></li>
+<li><a href="#markdown-header-how-it-works">How it works</a></li>
+</ul>
+<h1 id="markdown-header-knork">Knork</h1><h2 id="markdown-header-lightweight-view-injector-for-android">lightweight view injector for Android</h2><p>Knork allows you to inject views and to register event listeners on those by simply writing:</p>
+<pre><code class="lang-java">@Id(R.id.text) TextView mMyTextView;
+@On(CLICK + R.id.button)
+public void textUpdaterClicked(View v) {
+    mMyTextView.setText(&quot;Hello, Knork!&quot;);
 }
-
-.hljs-string,
-.hljs-tag .hljs-value,
-.hljs-filter .hljs-argument,
-.hljs-addition,
-.hljs-change,
-.apache .hljs-tag,
-.apache .hljs-cbracket,
-.nginx .hljs-built_in,
-.tex .hljs-formula {
-  color: #888;
+</code></pre>
+<h3 id="markdown-header-download">Download</h3><p>To start using Knork just download its JAR from Maven Central by adding this dependency to your build.gradle:</p>
+<pre><code class="lang-groovy">dependencies {
+    compile &#39;co.trikita:knork:1.2.0&#39;
 }
-
-.hljs-comment,
-.hljs-template_comment,
-.hljs-shebang,
-.hljs-doctype,
-.hljs-pi,
-.hljs-javadoc,
-.hljs-deletion,
-.apache .hljs-sqbracket {
-  color: #ccc;
-}
-
-.hljs-keyword,
-.hljs-tag .hljs-title,
-.ini .hljs-title,
-.lisp .hljs-title,
-.http .hljs-title,
-.nginx .hljs-title,
-.css .hljs-tag,
-.hljs-winutils,
-.hljs-flow,
-.apache .hljs-tag,
-.tex .hljs-command,
-.hljs-request,
-.hljs-status {
-  font-weight: bold;
-}
-</style><script>function each() {
-	var a = Array.prototype.slice.call(arguments)
-	if (typeof a[0] === 'string') a.unshift(document);
-	Array.prototype.some.call(a[0].querySelectorAll(a[1]), a[2]);
-}
-function prepareTabs(tabs) {
-	each(tabs, 'li > a', function(tab, i) {
-		tab.addEventListener('click', function(e) {
-			e.preventDefault();
-			each(tabs, 'li > a', function(a) { a.className = ''; });
-			each(tabs, '.tabs-content .code', function(content) { content.className = 'code hidden'; });
-			tab.className = 'active';
-			tabs.querySelectorAll('.tabs-content .code')[i].className = 'code';
-		});
-	});
-}
-
-window.onload = function() {
-	each('.tabs', prepareTabs);
-	document.addEventListener('scroll', function(e) {
-		e.preventDefault();
-		each('nav a', function(h) { h.className = '';});
-		each('.content section', function(h, i) {
-			var top = document.body.scrollTop || document.documentElement.scrollTop;
-			if (top < h.offsetTop + h.offsetHeight) {
-				document.querySelectorAll('nav a' )[i].className = 'active';
-				return true;
-			}
-		});
-	});
-};
-</script></head><body><div class="sidebar"><nav><ul><li><a href="#intro">Knork</a></li><li><a href="#download">Download</a></li><li><a href="#api">API</a></li><li><a href="#howitworks">Internals</a></li></ul></nav></div><div class="content"><div class="text"><header><h1>Knork</h1><h2>lightweight view injector for Android</h2></header><section id="intro"><p>Knork allows you to inject views and to register event listeners on those by simply writing:</p><div class="tabs"><div class="code"><pre><span class="hljs-annotation">@Id</span>(R.id.text) TextView mMyTextView;
-<span class="hljs-annotation">@On</span>(CLICK + R.id.button)
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">textUpdaterClicked</span><span class="hljs-params">(View v)</span> </span>{
-	mMyTextView.setText(<span class="hljs-string">"Hello, Knork!"</span>);
-}
-</pre></div></div></section><section id="download"><h2>Download</h2><p>To start using Knork just download its JAR from Maven Central by adding this dependency to your build.gradle:</p><div class="tabs"><div class="code"><pre>dependencies {
-	compile 'co.trikita:knork:1.2.0'
-}</pre></div></div><p>Maven users can use the following:</p><div class="tabs"><div class="code"><pre>&lt;dependency&gt;
-	&lt;groupId&gt;co.trikita&lt;/groupId&gt;
-	&lt;artifactId&gt;knork&lt;/artifactId&gt;
-	&lt;version&gt;1.2.0&lt;/version&gt;
+</code></pre>
+<p>Maven users can use the following:</p>
+<pre><code class="lang-xml">&lt;dependency&gt;
+    &lt;groupId&gt;co.trikita&lt;/groupId&gt;
+    &lt;artifactId&gt;knork&lt;/artifactId&gt;
+    &lt;version&gt;1.2.0&lt;/version&gt;
 &lt;/dependency&gt;
-</pre></div></div><p>Finally, Ant users can just download a knork AAR <a href="http://search.maven.org/remotecontent?filepath=co/trikita/knork/1.2.0/knork-1.2.0.aar">here</a>, unzip it and put classes.jar into their 'libs' directory. No other configuration is needed.</p></section><section id="api"><h2>API</h2><p>Knork is very easy to learn - it has only two annotations: @Id to inject views by their IDs and @On to attach event listeners.</p><p>It also has two static methods: inject() to initialize all your views and an optional reset() to do the clean-up. See? You've just learnt Knork.</p><div class="tabs"><div class="code"><pre><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyActivity</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Activity</span> </span>{
-	<span class="hljs-annotation">@Override</span>
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreate</span><span class="hljs-params">(Bundle b)</span> </span>{
-		<span class="hljs-keyword">super</span>.onCreate(b);
-		setContentView(R.layout.main);
-		Knork.inject(getWindow().getDecorView(), <span class="hljs-keyword">this</span>);
-	}
+</code></pre>
+<p>Finally, Ant users can just download a knork AAR
+<a href="http://search.maven.org/remotecontent?filepath=co/trikita/knork/1.2.0/knork-1.2.0.aar">here</a>,
+unzip it and put classes.jar into their &#39;libs&#39; directory. No other
+configuration is needed.</p>
+<h3 id="markdown-header-api">API</h3><p>Knork is very easy to learn - it has only two annotations: <code>@Id</code> to inject views
+by their IDs and <code>@On</code> to attach event listeners.</p>
+<p>It also has two static methods: inject() to initialize all your views and an
+optional reset() to do the clean-up. See? You&#39;ve just learnt Knork.</p>
+<pre><code class="lang-java">public class MyActivity extends Activity {
+    @Override
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+        setContentView(R.layout.main);
+        Knork.inject(getWindow().getDecorView(), this);
+    }
 
-	<span class="hljs-annotation">@Override</span>
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroy</span><span class="hljs-params">()</span> </span>{
-		Knork.reset(<span class="hljs-keyword">this</span>);
-		<span class="hljs-keyword">super</span>.onDestroy();
-	}
-}</pre></div></div><p>Or if you're using Fragments:</p><div class="tabs"><div class="code"><pre><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyFragment</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Fragment</span> </span>{
-	<span class="hljs-annotation">@Override</span>
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCreateView</span><span class="hljs-params">(LayoutInflater inflater, ViewGroup container, Bundle b)</span> </span>{
-		View view = inflater.inflate(R.layout.frg_main, container, <span class="hljs-keyword">false</span>);
-		Knork.inject(view, <span class="hljs-keyword">this</span>);
-		<span class="hljs-keyword">return</span> view;
-	}
-
-	<span class="hljs-annotation">@Override</span>
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onDestroyView</span><span class="hljs-params">()</span> </span>{
-		Knork.reset(<span class="hljs-keyword">this</span>);
-		<span class="hljs-keyword">super</span>.onDestroyView();
-	}
+    @Override
+    public void onDestroy() {
+        Knork.reset(this);
+        super.onDestroy();
+    }
 }
-</pre></div></div><p>Here's a full list of all the event binders that you can use out of the box. The notation below contains event name + callback prototype, e.g. the notation "FOO (FooView): int" means that you should use it like:</p><div class="tabs"><div class="code"><pre>@On(<b>FOO</b> + R.id.your_foo_view)
-public <b>int</b> yourFooMethod(<b>FooView</b> fooView) { ... }
-</pre></div></div><ul><li><b>INJECT (View): void</b> Called when a view is first injected.</li><li><b>CLICK (View): void</b> Called when a view is clicked (using View.OnClickListener).</li><li><b>LONGCLICK (View): void</b> Called when a view is long-clicked.</li><li><b>CHECK (CompoundButton button, boolean isChecked): void</b> Called when a compound button changes its state.</li><li><b>GROUP_CHECK (RadioGroup group, int checkedId): void</b> Called when a radio button in a group is checked.</li><li><b>EDITOR_ACTION (TextView text, int actionId, KeyEvent event): boolean</b> Called when an action ('done', 'next', 'send', 'search' etc) is performed in the editor.</li><li><b>FOCUS_CHANGE (View v, boolean hasFocus): void</b> Called when a view gains or loses the focus.</li><li><b>TOUCH (View v, MotionEvent event): boolean</b> Called when a view receives a touch event. Callback may return true to indicate that it has handled the event and it should not be processed by the other callbacks.</li><li><b>KEY (View v, int keyCode, KeyEvent event): boolean</b> Called when a view receives a key press event.</li><li><b>ITEM_CLICK (AdapterView parent, View v, int pos, long id): void</b> Called when a ListView or another AdapterView item is clicked.</li></ul><p>Normally Knork lets you bind only one callback to a single event of a view, but some injectors let you bind multiple callbacks. In this case all callbacks will be invoked when the event happens. Here's a list of such event bindings:</p><ul><li><b>SEEKBAR_CHANGE (SeekBar s, int progress, boolean fromUser): void</b></li><li><b>SEEKBAR_START_TRACKING (SeekBar s): void</b></li><li><b>SEEKBAR_STOP_TRACKING (SeekBar s): void</b></li><li><b>TEXTWATCHER_CHANGE (CharSequence s, int start, int before, int count): void</b></li><li><b>TEXTWATCHER_AFTER_CHANGE(Editable s): void</b></li><li><b>TEXTWATCHER_BEFORE_CHANGE(CharSequence s, int start, int count, int after): void</b></li><li><b>SPINNER_ITEM_SELECTED (AdapterView parent, View v, int pos, long id): void</b></li><li><b>SPINNER_NOTHING_SELECTED (AdapterView parent): void</b></li></ul><p>If you want to bind the same method to multiple view events you can use the following syntax:</p><div class="tabs"><div class="code"><pre><span class="hljs-annotation">@On</span>({CLICK + R.id.btn1, R.id.btn2, LONGCLICK + R.id.btn3, R.id.btn4})
-<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">handleClicks</span><span class="hljs-params">(View v)</span> </span>{
-	<span class="hljs-comment">// Will handle normal clicks on btn1/btn2  and long clicks on btn3/btn 4</span>
-	<span class="hljs-comment">// Please note that callback should have the same signature!</span>
-}</pre></div></div><p>You may also want to create custom injectors for your own events or views. In this case you should define your event code and register your injector:</p><div class="tabs"><div class="code"><pre><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> MY_INJECTOR = Knork.CUSTOM_INJECTOR + (<span class="hljs-number">1</span>L &lt;&lt; <span class="hljs-number">32</span>);
+</code></pre>
+<p>Or if you&#39;re using Fragments:</p>
+<pre><code class="lang-java">public class MyFragment extends Fragment {
+    @Override
+    public void onCreateView(LayoutInflater inflater, ViewGroup container, Bundle b) {
+        View view = inflater.inflate(R.layout.frg_main, container, false);
+        Knork.inject(view, this);
+        return view;
+    }
 
-<span class="hljs-keyword">static</span> {
-	Knork.registerInjector(MY_INJECTOR, <span class="hljs-keyword">new</span> CustomInjector());	
+    @Override
+    public void onDestroyView() {
+        Knork.reset(this);
+        super.onDestroyView();
+    }
+}
+</code></pre>
+<p>Here&#39;s a full list of all the event binders that you can use out of the box.
+The notation below contains event name + callback prototype, e.g. the
+notation &quot;FOO (FooView): int&quot; means that you should use it like:</p>
+<pre><code class="lang-java">@On(&lt;b&gt;FOO&lt;/b&gt; + R.id.your_foo_view)
+public &lt;b&gt;int&lt;/b&gt; yourFooMethod(&lt;b&gt;FooView&lt;/b&gt; fooView) { ... }
+</code></pre>
+<ul>
+<li><strong>INJECT (View): void</strong> Called when a view is first injected.</li>
+<li><strong>CLICK (View): void</strong> Called when a view is clicked (using View.OnClickListener).</li>
+<li><strong>LONGCLICK (View): void</strong> Called when a view is long-clicked.</li>
+<li><strong>CHECK (CompoundButton button, boolean isChecked): void</strong> Called when a compound button changes its state.</li>
+<li><strong>GROUP_CHECK (RadioGroup group, int checkedId): void</strong> Called when a radio button in a group is checked.</li>
+<li><strong>EDITOR_ACTION (TextView text, int actionId, KeyEvent event): boolean</strong> Called when an action (&#39;done&#39;, &#39;next&#39;, &#39;send&#39;, &#39;search&#39; etc) is performed in the editor.</li>
+<li><strong>FOCUS_CHANGE (View v, boolean hasFocus): void</strong> Called when a view gains or loses the focus.</li>
+<li><strong>TOUCH (View v, MotionEvent event): boolean</strong> Called when a view receives a touch event. Callback may return true to indicate that it has handled the event and it should not be processed by the other callbacks.</li>
+<li><strong>KEY (View v, int keyCode, KeyEvent event): boolean</strong> Called when a view receives a key press event.</li>
+<li><strong>ITEM_CLICK (AdapterView parent, View v, int pos, long id): void</strong> Called when a ListView or another AdapterView item is clicked.</li>
+</ul>
+<p>Normally Knork lets you bind only one callback to a single event of a view, but
+some injectors let you bind multiple callbacks. In this case all callbacks will
+be invoked when the event happens. Here&#39;s a list of such event bindings:</p>
+<ul>
+<li><strong>SEEKBAR_CHANGE (SeekBar s, int progress, boolean fromUser): void</strong></li>
+<li><strong>SEEKBAR_START_TRACKING (SeekBar s): void</strong></li>
+<li><strong>SEEKBAR_STOP_TRACKING (SeekBar s): void</strong></li>
+<li><strong>TEXTWATCHER_CHANGE (CharSequence s, int start, int before, int count): void</strong></li>
+<li><strong>TEXTWATCHER_AFTER_CHANGE(Editable s): void</strong></li>
+<li><strong>TEXTWATCHER_BEFORE_CHANGE(CharSequence s, int start, int count, int after): void</strong></li>
+<li><strong>SPINNER_ITEM_SELECTED (AdapterView parent, View v, int pos, long id): void</strong></li>
+<li><strong>SPINNER_NOTHING_SELECTED (AdapterView parent): void</strong></li>
+</ul>
+<p>If you want to bind the same method to multiple view events you can use the
+following syntax:</p>
+<pre><code class="lang-java">@On({CLICK + R.id.btn1, R.id.btn2, LONGCLICK + R.id.btn3, R.id.btn4})
+public void handleClicks(View v) {
+    // Will handle normal clicks on btn1/btn2  and long clicks on btn3/btn 4
+    // Please note that callback should have the same signature!
+}
+</code></pre>
+<p>You may also want to create custom injectors for your own events or views. In
+this case you should define your event code and register your injector:</p>
+<pre><code class="lang-java">public final static long MY_INJECTOR = Knork.CUSTOM_INJECTOR + (1L &lt;&lt; 32);
+
+static {
+    Knork.registerInjector(MY_INJECTOR, new CustomInjector());    
 }
 
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomInjector</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Knork</span>.<span class="hljs-title">SimpleInjector</span> </span>{
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inject</span><span class="hljs-params">(View v, <span class="hljs-keyword">long</span> action, <span class="hljs-keyword">final</span> Method m, <span class="hljs-keyword">final</span> Object o)</span> </span>{
-		<span class="hljs-comment">// Setup view listeners here</span>
-	}
-}</pre></div></div></section><section id="howitworks"><h2>Internals</h2><p>Knork does runtime annotation processing. It loops over every class annotation and keeps the list of @On and @Id annotations.</p><p>Then for each @Id annotation it performs findViewById() call and for each @On annotation it looks for a suitable injector. E.g. for the CLICK event the ClickInjector will be used that would register an OnClickListener to your view.</p><p>To keep things simple we use the same @On annotation, but tell events by their numeric code. We know that view ID is of an "int" type on android. Which means if we use "long" type for the event code - so we could store both event code and view ID in the same primitive field. Event codes take higher 32 bits on the long number.</p><p>That's why you have to use @On annotations with "CLICK + id" or "CLICK | id" form of arguments.</p><h3>How is that different from ButterKnife or RoboGuice?</h3><p>Knork is heavily inspired by the ButterKnife project, so the functionality is very similar. ButterKnife performs annotation processing during the build phase, so it should be faster in theory. But compile-time annotation processing may be broken with <a href="https://github.com/JakeWharton/butterknife/issues/165">some</a> <a href="https://github.com/JakeWharton/butterknife/issues/107">build</a> <a href="https://github.com/JakeWharton/butterknife/issues/31">systems</a>, so you will have to clean your project and rebuild it from time to time. This also makes it impossible to create custom injectors without modifying ButterKnife sources. Finally, ButterKnife doesn't let you unbind the injector on reset(), which may be helpful in some cases with adapters.</p><p>Regarding the rest of the libraries - they can be categorized as the following:</p><ul><li>Powerful compile-time annotations (Dagger, AndroidAnnotations) - they are fast but hard to extend.</li><li>Powerful run-time annotations (RoboGuice, DroidParts) - they are a bit slower, could be easy to extend but may be too complex for your needs.</li><li>Simple compile-time annotations (ButterKnife) - fast, easy to learn, easy to use, but still hard to extend.</li><li>Simple run-time annotations (Knork) - easy to learn, easy to extend, no build system issues, but may be slow.</li></ul><p>So, are the run-time annotations really that slow? We've heard the mantra that no reflection or runtime annotation processing should happen on mobile devices. So, here's some benchmarks. A reasonably old Sony Xperia phone was used and each benchmark ran 5 times in random order.</p><table><thead><tr><td>Benchmark</td><td>Knork</td><td>ButterKnife</td><td>RoboGuice</td><td>Manual injection</td></tr></thead><tbody><tr><td>Inject</td><td>0.037 ms/op</td><td>0.017 ms/op</td><td>-</td><td>0.011 ms/op</td></tr><tr><td>Inflate+Inject</td><td>16.86 ms/op</td><td>16.30 ms/op</td><td>18.77 ms/op</td><td>15.89 ms/op</td></tr><tr><td>Click</td><td>0.0022 ms/op</td><td>0.0024 ms/op</td><td>0.0024 ms/op</td><td>0.0022 ms/op</td></tr><tr><td>Callback</td><td>0.0016 ms/op</td><td>0.0016 ms/op</td><td>0.0017 ms/op</td><td>0.0016 ms/op</td></tr></tbody></table><p>The results show that Knork is really slower than ButterKnife or manual injection using findViewById(). In fact it's 3 times slower comparing to ButterKnife. But that should not really matter in practice, because when we measured the whole inflation+injection cycle we found that inflation is hundreds of times slower than injection. In fact when measuring both inflation and injection - Knork is only 3% slower than ButterKnife (and in some benchmark iterations it was even faster).</p><p>As for the callback invocation - all injectors show similar results, probably because of some JIT opminizations. We took two benchmarks - one that simulates real button click with a clicking sound etc (using performClick()) and another that just invokes the callback. The latter is twice faster, but the results are about the same across the tested libraries.</p><p>We were not able to measure pure injection time in RoboGuice (which turned out to be the slowest injector in our benchmark), because it looks like they only do injections within the Activities, Fragments or Views which results in inflating and injection of the nested views in one place. Also RoboGuice doesn't provide an event listener injection to the views (like click listeners etc) so we did it manually.</p><p>Anyway, thank you for reading up to the very end, and we would be happy to hear your feedback, reported issues, suggested features and pull requests.</p></section></div><footer><p>Code licensed under the MIT license. Sources repository is available at http://bitbucket.org/trikita/knork</p></footer></div><a href="https://bitbucket.org/trikita/knork" style="position:absolute;z-index:10000;top:0;right:0;"><img src="https://bitbucket.org/zgramana/bitbucket-ribbons/raw/988dffc5fbeb/png/bitbucket-ribbon-green.png"></a></body></html>
+public static class CustomInjector extends Knork.SimpleInjector {
+    public void inject(View v, long action, final Method m, final Object o) {
+        // Setup view listeners here
+    }
+}
+</code></pre>
+<h3 id="markdown-header-how-it-works">How it works</h3><p>Knork does runtime annotation processing. It loops over every class annotation and keeps the list of <code>@On</code> and <code>@Id</code> annotations.</p>
+<p>Then for each @Id annotation it performs findViewById() call and for each
+<code>@On</code> annotation it looks for a suitable injector. E.g. for the CLICK
+event the ClickInjector will be used that would register an
+OnClickListener to your view.</p>
+<p>To keep things simple we use the same <code>@On</code> annotation, but tell events by their
+numeric code. We know that view ID is of an &quot;int&quot; type on android.  Which means
+if we use &quot;long&quot; type for the event code - so we could store both event code
+and view ID in the same primitive field. Event codes take higher 32 bits on the
+long number.</p>
+<p>That&#39;s why you have to use <code>@On</code> annotations with &quot;CLICK + id&quot; or &quot;CLICK | id&quot;
+form of arguments.</p>
+<h4 id="markdown-header-how-is-that-different-from-butterknife-or-roboguice-">How is that different from ButterKnife or RoboGuice?</h4><p>Knork is heavily inspired by the ButterKnife project, so the functionality is
+very similar. ButterKnife performs annotation processing during the build
+phase, so it should be faster in theory. But compile-time annotation processing
+may be broken with <a href="https://github.com/JakeWharton/butterknife/issues/165">some</a>
+<a href="https://github.com/JakeWharton/butterknife/issues/107">build</a>
+<a href="https://github.com/JakeWharton/butterknife/issues/31">systems</a>, so you
+will have to clean your project and rebuild it from time to time. This also
+makes it impossible to create custom injectors without modifying ButterKnife
+sources. Finally, ButterKnife doesn&#39;t let you unbind the injector on reset(),
+which may be helpful in some cases with adapters.</p>
+<p>Regarding the rest of the libraries - they can be categorized as the following:</p>
+<ul>
+<li>Powerful compile-time annotations (Dagger, AndroidAnnotations) - they are fast but hard to extend.</li>
+<li>Powerful run-time annotations (RoboGuice, DroidParts) - they are a bit slower, could be easy to extend but may be too complex for your needs.</li>
+<li>Simple compile-time annotations (ButterKnife) - fast, easy to learn, easy to use, but still hard to extend.</li>
+<li>Simple run-time annotations (Knork) - easy to learn, easy to extend, no build system issues, but may be slow.</li>
+</ul>
+<p>So, are the run-time annotations really that slow? We&#39;ve heard the mantra that
+no reflection or runtime annotation processing should happen on mobile devices.
+So, here&#39;s some benchmarks. A reasonably old Sony Xperia phone was used and
+each benchmark ran 5 times in random order.</p>
+<table>
+<thead>
+<tr>
+<th>Benchmark</th>
+<th>Knork</th>
+<th>ButterKnife</th>
+<th>RoboGuice</th>
+<th>Manual Injection</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inject</td>
+<td>0.037ms/op</td>
+<td>0.017ms/op</td>
+<td>n/a</td>
+<td>0.011ms/op</td>
+</tr>
+<tr>
+<td>Inflate+Inject</td>
+<td>16.86ms/op</td>
+<td>16.30ms/op</td>
+<td>18.77ms/op</td>
+<td>15.89ms/op</td>
+</tr>
+<tr>
+<td>Click</td>
+<td>0.0022ms/op</td>
+<td>0.0024ms/op</td>
+<td>0.0024ms/op</td>
+<td>0.0022ms/op</td>
+</tr>
+<tr>
+<td>Callback</td>
+<td>0.0016ms/op</td>
+<td>0.0016ms/op</td>
+<td>0.0017ms/op</td>
+<td>0.0016ms/op</td>
+</tr>
+</tbody>
+</table>
+<p>The results show that Knork is really slower than ButterKnife or manual
+injection using findViewById(). In fact it&#39;s 3 times slower comparing to
+ButterKnife. But that should not really matter in practice, because when we
+measured the whole inflation+injection cycle we found that inflation is
+hundreds of times slower than injection. In fact when measuring both inflation
+and injection - Knork is only 3% slower than ButterKnife (and in some benchmark
+iterations it was even faster).</p>
+<p>As for the callback invocation - all injectors show similar results, probably
+because of some JIT opminizations. We took two benchmarks - one that simulates
+real button click with a clicking sound etc (using performClick()) and another
+that just invokes the callback. The latter is twice faster, but the results are
+about the same across the tested libraries.</p>
+<p>We were not able to measure pure injection time in RoboGuice (which turned out
+to be the slowest injector in our benchmark), because it looks like they only
+do injections within the Activities, Fragments or Views which results in
+inflating and injection of the nested views in one place. Also RoboGuice
+doesn&#39;t provide an event listener injection to the views (like click
+listeners etc) so we did it manually.</p>
+<p>Anyway, thank you for reading up to the very end, and we would be happy to hear
+your feedback, reported issues, suggested features and pull requests.</p>
+<p>Code licensed under the MIT license. Sources repository is available at <a href="http://bitbucket.org/trikita/knork">http://bitbucket.org/trikita/knork</a></p>
+
+		<a href="https://bitbucket.org/trikita/knork" style="position:absolute;z-index:10000;top:0;right:0;">
+			<img src="https://bitbucket.org/zgramana/bitbucket-ribbons/raw/988dffc5fbeb/png/bitbucket-ribbon-green.png">
+		</a>
+		<script src="app.js"></script>
+	</body>
+</html>
+
