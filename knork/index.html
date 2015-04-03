@@ -14,23 +14,23 @@
 <li><a href="#markdown-header-how-it-works">How it works</a></li>
 </ul>
 <h1 id="markdown-header-knork">Knork</h1><h2 id="markdown-header-lightweight-view-injector-for-android">lightweight view injector for Android</h2><p>Knork allows you to inject views and to register event listeners on those by simply writing:</p>
-<pre><code class="lang-java">@Id(R.id.text) TextView mMyTextView;
-@On(CLICK + R.id.button)
-public void textUpdaterClicked(View v) {
-    mMyTextView.setText(&quot;Hello, Knork!&quot;);
+<pre><code class="lang-java"><span class="hljs-annotation">@Id</span>(R.id.text) TextView mMyTextView;
+<span class="hljs-annotation">@On</span>(CLICK + R.id.button)
+<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">textUpdaterClicked</span><span class="hljs-params">(View v)</span> </span>{
+    mMyTextView.setText(<span class="hljs-string">"Hello, Knork!"</span>);
 }
 </code></pre>
 <h3 id="markdown-header-download">Download</h3><p>To start using Knork just download its JAR from Maven Central by adding this dependency to your build.gradle:</p>
-<pre><code class="lang-groovy">dependencies {
-    compile &#39;co.trikita:knork:1.2.0&#39;
+<pre><code class="lang-groovy"><span class="hljs-keyword">dependencies</span> {
+    <span class="hljs-keyword">compile</span> <span class="hljs-string">'co.trikita:knork:1.2.0'</span>
 }
 </code></pre>
 <p>Maven users can use the following:</p>
-<pre><code class="lang-xml">&lt;dependency&gt;
-    &lt;groupId&gt;co.trikita&lt;/groupId&gt;
-    &lt;artifactId&gt;knork&lt;/artifactId&gt;
-    &lt;version&gt;1.2.0&lt;/version&gt;
-&lt;/dependency&gt;
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>co.trikita<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>knork<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>1.2.0<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span>
 </code></pre>
 <p>Finally, Ant users can just download a knork AAR
 <a href="http://search.maven.org/remotecontent?filepath=co/trikita/knork/1.2.0/knork-1.2.0.aar">here</a>,
@@ -40,34 +40,34 @@ configuration is needed.</p>
 by their IDs and <code>@On</code> to attach event listeners.</p>
 <p>It also has two static methods: inject() to initialize all your views and an
 optional reset() to do the clean-up. See? You&#39;ve just learnt Knork.</p>
-<pre><code class="lang-java">public class MyActivity extends Activity {
-    @Override
-    public void onCreate(Bundle b) {
-        super.onCreate(b);
-        setContentView(R.layout.main);
-        Knork.inject(getWindow().getDecorView(), this);
+<pre><code class="lang-java">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyActivity</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">Activity</span> {</span>
+    <span class="hljs-annotation">@Override</span>
+    public void onCreate(<span class="hljs-type">Bundle</span> b) {
+        <span class="hljs-keyword">super</span>.onCreate(b);
+        setContentView(<span class="hljs-type">R</span>.layout.main);
+        <span class="hljs-type">Knork</span>.inject(getWindow().getDecorView(), <span class="hljs-keyword">this</span>);
     }
 
-    @Override
+    <span class="hljs-annotation">@Override</span>
     public void onDestroy() {
-        Knork.reset(this);
-        super.onDestroy();
+        <span class="hljs-type">Knork</span>.reset(<span class="hljs-keyword">this</span>);
+        <span class="hljs-keyword">super</span>.onDestroy();
     }
 }
 </code></pre>
 <p>Or if you&#39;re using Fragments:</p>
-<pre><code class="lang-java">public class MyFragment extends Fragment {
-    @Override
-    public void onCreateView(LayoutInflater inflater, ViewGroup container, Bundle b) {
-        View view = inflater.inflate(R.layout.frg_main, container, false);
-        Knork.inject(view, this);
-        return view;
+<pre><code class="lang-java">public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyFragment</span> <span class="hljs-keyword"><span class="hljs-keyword">extends</span></span> <span class="hljs-title">Fragment</span> {</span>
+    <span class="hljs-annotation">@Override</span>
+    public void onCreateView(<span class="hljs-type">LayoutInflater</span> inflater, <span class="hljs-type">ViewGroup</span> container, <span class="hljs-type">Bundle</span> b) {
+        <span class="hljs-type">View</span> view = inflater.inflate(<span class="hljs-type">R</span>.layout.frg_main, container, <span class="hljs-literal">false</span>);
+        <span class="hljs-type">Knork</span>.inject(view, <span class="hljs-keyword">this</span>);
+        <span class="hljs-keyword">return</span> view;
     }
 
-    @Override
+    <span class="hljs-annotation">@Override</span>
     public void onDestroyView() {
-        Knork.reset(this);
-        super.onDestroyView();
+        <span class="hljs-type">Knork</span>.reset(<span class="hljs-keyword">this</span>);
+        <span class="hljs-keyword">super</span>.onDestroyView();
     }
 }
 </code></pre>
@@ -75,7 +75,7 @@ optional reset() to do the clean-up. See? You&#39;ve just learnt Knork.</p>
 The notation below contains event name + callback prototype, e.g. the
 notation &quot;FOO (FooView): int&quot; means that you should use it like:</p>
 <pre><code class="lang-java">@On(&lt;b&gt;FOO&lt;/b&gt; + R.id.your_foo_view)
-public &lt;b&gt;int&lt;/b&gt; yourFooMethod(&lt;b&gt;FooView&lt;/b&gt; fooView) { ... }
+public &lt;b&gt;int&lt;/b&gt; yourFooMethod(&lt;b&gt;FooView&lt;/b&gt; fooView) { <span class="hljs-keyword">...</span> }
 </code></pre>
 <ul>
 <li><strong>INJECT (View): void</strong> Called when a view is first injected.</li>
@@ -104,23 +104,23 @@ be invoked when the event happens. Here&#39;s a list of such event bindings:</p>
 </ul>
 <p>If you want to bind the same method to multiple view events you can use the
 following syntax:</p>
-<pre><code class="lang-java">@On({CLICK + R.id.btn1, R.id.btn2, LONGCLICK + R.id.btn3, R.id.btn4})
-public void handleClicks(View v) {
-    // Will handle normal clicks on btn1/btn2  and long clicks on btn3/btn 4
-    // Please note that callback should have the same signature!
+<pre><code class="lang-java"><span class="hljs-annotation">@On</span>({CLICK + R.id.btn1, R.id.btn2, LONGCLICK + R.id.btn3, R.id.btn4})
+<span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">handleClicks</span><span class="hljs-params">(View v)</span> </span>{
+    <span class="hljs-comment">// Will handle normal clicks on btn1/btn2  and long clicks on btn3/btn 4</span>
+    <span class="hljs-comment">// Please note that callback should have the same signature!</span>
 }
 </code></pre>
 <p>You may also want to create custom injectors for your own events or views. In
 this case you should define your event code and register your injector:</p>
-<pre><code class="lang-java">public final static long MY_INJECTOR = Knork.CUSTOM_INJECTOR + (1L &lt;&lt; 32);
+<pre><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> MY_INJECTOR = Knork.CUSTOM_INJECTOR + (<span class="hljs-number">1L</span> &lt;&lt; <span class="hljs-number">32</span>);
 
-static {
-    Knork.registerInjector(MY_INJECTOR, new CustomInjector());    
+<span class="hljs-keyword">static</span> {
+    Knork.registerInjector(MY_INJECTOR, <span class="hljs-keyword">new</span> CustomInjector());    
 }
 
-public static class CustomInjector extends Knork.SimpleInjector {
-    public void inject(View v, long action, final Method m, final Object o) {
-        // Setup view listeners here
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CustomInjector</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Knork</span>.<span class="hljs-title">SimpleInjector</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inject</span><span class="hljs-params">(View v, <span class="hljs-keyword">long</span> action, <span class="hljs-keyword">final</span> Method m, <span class="hljs-keyword">final</span> Object o)</span> </span>{
+        <span class="hljs-comment">// Setup view listeners here</span>
     }
 }
 </code></pre>

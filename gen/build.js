@@ -25,7 +25,10 @@ less.render(css, function(e, output) {
 
 var html = template.replace('$CONTENT', marked(content, {
 	renderer: renderer,
-	gfm: true
+	gfm: true,
+	highlight: function (code) {
+		return require('highlight.js').highlightAuto(code).value;
+	}
 }));
 fs.writeFileSync('index.html', html);
 
