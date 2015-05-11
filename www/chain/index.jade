@@ -1,0 +1,15 @@
+doctype html
+html
+	head
+		link(href="http://fonts.googleapis.com/css?family=Inconsolata:400,700", rel="stylesheet", type="text/css")
+		link(href="http://fonts.googleapis.com/css?family=Crimson+Text:400,700", rel="stylesheet", type="text/css")
+		link(href="styles.css", rel="stylesheet", type="text/css")
+		link(href="ascetic.css", rel="stylesheet", type="text/css")
+	body
+		include:markdown ../../../chain/README.md
+		a(href="https://bitbucket.org/trikita/chain", style="position:absolute;z-index:10000;top:0;right:0;")
+			img(src="https://bitbucket.org/zgramana/bitbucket-ribbons/raw/988dffc5fbeb/png/bitbucket-ribbon-gray.png")
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.5/highlight.min.js")
+		script
+			| hljs.initHighlightingOnLoad();
+		script(src="app.js")
