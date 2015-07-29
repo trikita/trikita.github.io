@@ -1,0 +1,38 @@
+doctype html
+html(lang="en")
+	head
+		title Trikita Pixels | minimal, simple and beautiful
+		meta(name="viewport", content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0")
+		meta(name="description", content="We create simple and intuitive mobile apps, captivating android games and effective tools for developers")
+		link(href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:100,300', rel='stylesheet', type='text/css')
+		style
+			| * {margin: 0; padding: 0; box-sizing: border-box; }
+			| .container { display: flex; min-height: 100vh; flex-direction: column; }
+			| .wrap-width { padding-left: 1em; padding-right: 1em; }
+			| @media screen and (min-width: 900px) {
+			|  .wrap-width { padding-left: 0; padding-right: 0; width: 900px; margin: 0 auto; }
+			| }
+			| h1 { line-height: 5em; font-size: 3em; font-family: 'Alegreya Sans SC', sans-serif;}
+			| .center { text-align: center; }
+			| .grey { color: rgba(0, 0, 0, 0.54); }
+			| .plain {text-decoration: none; }
+			| .gallery { font-size: 0; display: flex; flex-flow: row wrap; flex: 1;}
+			| .image { flex: auto; width: 300px; }
+			| .image > img { width: 100%; height: auto; }
+			| .copyright { padding: 2em 0 1em 0; }
+	body
+		- var reExt = new RegExp('\.(png|gif|jpg|jpeg)$');
+		- function altname(s) {
+		-   return s.replace(/^\d\d_/, '').replace(/_/g, ' ').replace(reExt, '');
+		- }
+		.container.wrap-width
+			h1.center
+				a.plain.grey(href="http://trikita.co/") Trikita Pixels
+			.gallery
+				each f in public._contents
+					if f.toString().match(reExt)
+						.image
+							img(src="#{f}", alt="#{altname(f)}", title="#{altname(f)}")
+			.copyright.center
+				a.plain.grey(href="http://trikita.co/") &copy; Trikita 2015
+
