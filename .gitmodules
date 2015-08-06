@@ -1,0 +1,3 @@
+[submodule "www/palette"]
+	path = www/palette
+	url = git@github.com:zserge/palette.git
