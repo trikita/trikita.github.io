@@ -5,7 +5,7 @@ html(lang="en")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0")
 		meta(name="description", content="We create simple and intuitive mobile apps, captivating android games and effective tools for developers")
 		link(rel='stylesheet', href='styles.css', type='text/css')
-		link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
+		link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")
 		link(href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:100,300', rel='stylesheet', type='text/css')
 		link(href='http://fonts.googleapis.com/css?family=Oxygen:100,300', rel='stylesheet', type='text/css')
 	body
@@ -15,65 +15,73 @@ html(lang="en")
 					h1 Trikita
 				| &nbsp;
 				.links.inline
-					a(href="https://www.google.com/+Trikita").icon-plus
-						i.fa
 					a(href="https://twitter.com/trkta").icon-bird
+						i.fa
+					a(href="https://medium.com/@trikita").icon-medium
+						i.fa
+					a(href="https://github.com/trikita").icon-github
 						i.fa
 			.apps
 				ul.grid
 					li
-						a(href="https://play.google.com/store/apps/details?id=trikita.obsqr")
-							.app.yellow
-								.descr
-									h3 Obsqr
-									p QR scanner
-					li
 						a(href="https://play.google.com/store/apps/details?id=trikita.talalarmo")
-							.app.orange
+							.app.cyan
 								.descr
 									h3 Talalarmo
 									p Alarm clock
 					li
-						a(href="https://play.google.com/store/apps/details?id=trikita.spot")
+						a(href="https://github.com/trikita/kumquat")
+							.app.deep-orange
+								.descr
+									h3 Kumquat
+									p MQTT client
+					li
+						a(href="https://github.com/zserge/anvil")
 							.app.purple
+								.descr
+									h3 Anvil
+									p Reactive UI library for Android
+					li
+						a(href="https://github.com/trikita/slide")
+							.app.orange
+								.descr
+									h3 Slide
+									p Plain text slideshow tool
+					li
+						a(href="http://0xrgb.com")
+							.app.blue
+								.descr
+									h3 Palette
+									p Modern color picker
+					li
+						a(href="https://play.google.com/store/apps/details?id=trikita.obsqr")
+							.app.red
+								.descr
+									h3 Obsqr
+									p QR scanner
+					li
+						a(href="https://play.google.com/store/apps/details?id=trikita.spot")
+							.app.green
 								.descr
 									h3 Spot
 									p Sliding puzzle
 					li
 						a(href="https://play.google.com/store/apps/details?id=trikita.quilt")
-							.app.blue
+							.app.pink
 								.descr
 									h3 Quilt
 									p Memory game
 					li
-						a(href="https://play.google.com/store/apps/details?id=trikita.harpion")
-							.app.red
+						a(href="https://github.com/trikita/hut")
+							.app.indigo
 								.descr
-									h3 Harpion
-									p Harmonica app
-					li
-						a(href="http://0xrgb.com")
-							.app.orange
-								.descr
-									h3 Palette
-									p Modern color picker
-					li
-						a(href="https://github.com/zserge/anvil")
-							.app.orange
-								.descr
-									h3 Anvil
-									p Android UI library
-					li
-						a(href="https://github.com/zserge/log")
-							.app.light-green
-								.descr
-									h3 Log 
-									p Android logger
+									h3 Hut
+									p Ascetic launcher for Android
 
 		footer
 			.wrap-width.full-height
 				.center-vertical
-					p We're Serge and Anna.
+					p We're #[a(href="https://github.com/zserge") Serge] and #[a(href="https://github.com/krugloid") Anna].
 					p We work together under the name Trikita.
 					p Simplicity is our passion.
 					p &nbsp;

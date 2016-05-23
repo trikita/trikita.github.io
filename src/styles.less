@@ -59,16 +59,18 @@ html, body, .container {
 @orange: #ff9800;
 @blue: #2196f3;
 @green: #4caf50;
-@teal: #00bcdd;
+@teal: #009688;
 @gray: #455a64;
 @yellow: #cddc39;
-@red: #ff5252;
+@red: #e51c23;
 @light-green: #8bc34a;
 @pink: #e91e63;
 @lime: #cddc39;
 @amber: #ffc107;
 @cyan: #00bcd4;
 @deep-orange: #ff5722;
+@brown: #795548;
+@plum: #75507b;
 
 @white: #ffffff;
 @light-gray: #e0e0e0;
@@ -102,7 +104,8 @@ html, body, .container {
 // Variables
 //
 @footer-height: 20em;
-@footer-background-color: @gray;
+/*@footer-background-color: @indigo;*/
+@footer-background-color: @plum;
 @footer-color: white;
 
 @hr-color: @light-gray;
@@ -155,14 +158,20 @@ header {
 		.icon-bird:hover {
 			background-color: @blue;
 		}
-		.icon-plus:hover {
-			background-color: @red;
+		.icon-medium:hover {
+			background-color: @green;
+		}
+		.icon-github:hover {
+			background-color: @gray;
 		}
 		.icon-bird .fa:after {
 			content: "\f099";
 		}
-		.icon-plus .fa:after {
-			content: "\f0d5";
+		.icon-medium .fa:after {
+			content: "\f23a";
+		}
+		.icon-github .fa:after {
+			content: "\f09b";
 		}
 	}
 }
@@ -222,10 +231,15 @@ footer {
 		font-weight: 100;
 	}
 
+	a {
+	  color: rgba(255, 255, 255, 0.5);
+	}
+
 	.email {
 		font-weight: 300;
 		font-family: 'Alegreya Sans SC', sans-serif;
-		color: @orange;
+		color: @amber;
+		text-decoration: none;
 	}
 }
 
