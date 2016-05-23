@@ -1,0 +1,21 @@
+{
+  "name": "trikita.co",
+  "version": "1.0.0",
+  "description": "Trikita website",
+  "scripts": {
+    "build": "harp compile src dist && cp -rv dist/* .",
+    "serve": "harp server src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krugloid/trikita.co.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/krugloid/trikita.co/issues"
+  },
+  "devDependencies": {
+    "harp": "^0.20.3"
+  }
+}
