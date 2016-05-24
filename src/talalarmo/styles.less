@@ -1,0 +1,105 @@
+@import url(http://fonts.googleapis.com/css?family=Oxygen:100,300);
+@import url(http://fonts.googleapis.com/css?family=Cagliostro:400);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@yellow: #ffeb3b;
+@cyan: #00bcd4;
+
+@main-background: @cyan;
+@footer-background: @yellow;
+@footer-foreground: #333;
+
+body {
+  overflow-x: hidden;
+  font-family: Oxygen, sans-serif;
+  background-color: @main-background;
+}
+
+h1, h2, h3 {
+  font-family: 'Cagliostro', sans-serif;
+  font-weight: 400;
+}
+h1 { font-size: 4rem; }
+h2 { font-size: 3.0rem; }
+h3 { font-size: 2.4rem; }
+ul { list-style: inside; margin: 1.5rem 0 1.5rem 0; }
+li { font-size: 1.5rem; margin-bottom: 1rem; }
+blockquote { margin-bottom: 1rem; font-style: italic; }
+a { color: rgba(0, 0, 0, 0.5); }
+a:hover { color: rgba(255, 255, 255, 0.5); }
+img { max-width: 100%; height: auto; }
+
+.break, footer {
+  background-color: @footer-background;
+  color: @footer-foreground;
+  padding: 4rem 0 2em 0;
+  a:hover { color: rgba(0, 0, 0, 0.3); }
+}
+
+.play-button-wrapper {
+  margin: 3rem 0;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.row {
+  min-height: 5vh;
+}
+
+.break {
+  margin-bottom: 1rem;
+  font-style: italic;
+  .row {
+    min-height: 30vh;
+    font-size: 2rem;
+    padding: 1rem 0;
+  }
+}
+
+.ribbon {
+  position: absolute; 
+  top: 42px;
+  width: 200px;
+  padding: 1px 0;
+  background: #fff;
+  color: @cyan;
+}
+.ribbon.right{
+  right: -42px;
+  -moz-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.ribbon a, 
+.ribbon a:visited, 
+.ribbon a:active, 
+.ribbon a:hover{
+  display: block;
+  padding: 1px 0;
+  height: 24px;
+  line-height: 24px;
+  color: inherit;  
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Cagliostro', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+@media only screen and (max-width: 48em) {
+  h1 {
+    font-size: 3rem;
+  }
+}

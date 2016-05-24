@@ -1,0 +1,92 @@
+doctype html
+html(lang='en')
+	head
+		title Talalarmo | World simplest alarm clock
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(name="description", content="Minimal alarm clock crafted by nap enthusiasts")
+		link(href='flexboxgrid.min.css', rel='stylesheet', type='text/css')
+		link(href='styles.css', rel='stylesheet', type='text/css')
+	body
+		.ribbon.right
+			a(href='https://github.com/trikita/talalarmo') Fork me on Github
+		.container
+			.row.middle-xs.center-xs
+				.col-xs-12.col-md-6
+					.box
+						h1 Talalarmo
+						h2 Starts your day
+						.row.center-xs.play-button-wrapper
+							.col-xs-8
+								.box
+									a(href='https://play.google.com/store/apps/details?id=trikita.talalarmo&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1')
+										img(alt='Get it on Google Play', src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png')
+									p Also available on #[a(href='https://f-droid.org/wiki/page/trikita.talalarmo') F-Droid] and #[a(href='https://github.com/trikita/talalarmo') Github]
+				.col-xs-12.col-md-6
+					.box
+						img(src='talalarmo_framed_02.png', width="480")
+
+		.break
+			.container
+				.row.middle-xs.center-xs
+					.col-xs
+						.box
+							p Crafted by a team with over 25 years of sleeping experience &mdash; it just has to be the best! 
+
+		.container
+			.row.middle-xs.start-md.center-xs
+				.col-xs-12.col-md-6
+					.box
+						img(src='talalarmo_framed_01.png', width="480")
+				.col-xs-12.col-md-6.last-md.first-xs
+					.box
+						h3 Alarm for minimalists
+						ul
+							li Does one thing, yet does it very well
+							li Keeps one alarm time recurring daily like simple wind-up alarm clocks 
+							li Ingenious input method allows you to set alarm in less than a second
+		.container
+			.row.middle-xs.start-md.center-xs
+				.col-xs-12.col-md-6
+					.box
+						h3 Rise and shine!
+						ul
+							li Dismiss alarm by touching the screen anywhere
+							li Handy if you are still sleepy and have barely opened your eyes
+							li No snooze mode - be honest to yourself!
+				.col-xs-12.col-md-6
+					.box
+						img(src='talalarmo_framed_03.png', width="480")
+		footer
+			.container
+				.row
+					.col-xs-12.col-md-4
+						.box
+							blockquote
+								p &ldquo;Simple, functional, effective&rdquo;
+					.col-xs-12.col-md-4
+						.box
+							blockquote
+								p &ldquo;It's tiny, it asks for no permissions, it's dead simple to use, and it's even good looking&rdquo;
+					.col-xs-12.col-md-4
+						.box
+							blockquote
+								p &ldquo;No adds and can press the whole screen to turn off. The perfect basic alarm clock. Tried many until I found this one. Thank you&rdquo;
+
+			.container
+				.row.center-xs.middle-xs.around-xs
+					.col-xs-8.col-md-4
+						.box.play-button-wrapper
+							a(href='https://play.google.com/store/apps/details?id=trikita.talalarmo&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1')
+								img(alt='Get it on Google Play', src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png')
+			.container
+				.row.center-xs.middle-xs
+					.col-xs-12.col-md-6
+						.row.center-xs.middle-xs
+							.col-xs-12.col-md.first-md.last-xs
+								a(href='http://trikita.co') &copy; Trikita 2016
+							.col-xs-12.col-md
+								a(href='https://github.com/trikita/talalarmo') Github
+							.col-xs-12.col-md
+								a(href='http://trikita.co') More apps
+		!= partial('../_shared/analytics')
+
