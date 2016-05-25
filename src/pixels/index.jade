@@ -17,8 +17,8 @@ html(lang="en")
 			| .grey { color: rgba(0, 0, 0, 0.54); }
 			| .plain {text-decoration: none; }
 			| .gallery { font-size: 0; display: flex; flex-flow: row wrap; flex: 1;}
-			| .image { flex: auto; width: 300px; }
-			| .image > img { width: 100%; height: auto; }
+			| .image { flex: auto; max-width: 300px; }
+			| .image > img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
 			| .copyright { padding: 2em 0 1em 0; }
 	body
 		- var reExt = new RegExp('\.(png|gif|jpg|jpeg)$');
@@ -29,7 +29,7 @@ html(lang="en")
 			h1.center
 				a.plain.grey(href="http://trikita.co/") Trikita Pixels
 			.gallery
-				each f in public._contents
+				each f in public.pixels._contents
 					if f.toString().match(reExt)
 						.image
 							img(src="#{f}", alt="#{altname(f)}", title="#{altname(f)}")
