@@ -17,7 +17,7 @@ html(lang="en")
 			| .grey { color: rgba(0, 0, 0, 0.54); }
 			| .plain {text-decoration: none; }
 			| .gallery { font-size: 0; display: flex; flex-flow: row wrap; flex: 1;}
-			| .image { flex: auto; max-width: 300px; }
+			| .card { flex: auto; width: 300px; display: flex; justify-content: center; align-items: center; margin: 1rem; padding: 2rem; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 12px rgba(0, 0, 0, 0.23);  }
 			| .image > img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
 			| .copyright { padding: 2em 0 1em 0; }
 	body
@@ -31,8 +31,9 @@ html(lang="en")
 			.gallery
 				each f in public.pixels._contents
 					if f.toString().match(reExt)
-						.image
-							img(src="#{f}", alt="#{altname(f)}", title="#{altname(f)}")
+						.card
+							.image
+								img(src="#{f}", alt="#{altname(f)}", title="#{altname(f)}")
 			.copyright.center
-				a.plain.grey(href="http://trikita.co/") &copy; Trikita 2015
+				a.plain.grey(href="http://trikita.co/") &copy; Trikita 2016
 		!= partial('../_shared/analytics')
