@@ -15,11 +15,11 @@ html(lang="en")
 			| h1 { line-height: 5em; font-size: 3em; font-family: 'Alegreya Sans SC', sans-serif;}
 			| .center { text-align: center; }
 			| .grey { color: rgba(0, 0, 0, 0.54); }
-			| .plain {text-decoration: none; }
+			| .plain {text-decoration: none; font-family: 'Alegreya Sans SC', sans-serif;}
 			| .gallery { font-size: 0; display: flex; flex-flow: row wrap; flex: 1;}
 			| .card { flex: auto; width: 300px; display: flex; justify-content: center; align-items: center; margin: 1rem; padding: 2rem; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 12px rgba(0, 0, 0, 0.23);  }
 			| .image > img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
-			| .copyright { padding: 2em 0 1em 0; }
+			| .copyright { padding: 2em 0 2em 0; }
 	body
 		- var reExt = new RegExp('\.(png|gif|jpg|jpeg)$');
 		- function altname(s) {
