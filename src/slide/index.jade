@@ -1,0 +1,99 @@
+doctype html
+html(lang='en')
+	head
+		title Slide | Plain text presentation maker
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(name="description", content="Create presentations by writing text, use Takahashi method to stay organized during the talk, give clear visual support to your audience")
+		link(href='flexboxgrid.min.css', rel='stylesheet', type='text/css')
+		link(href='styles.css', rel='stylesheet', type='text/css')
+	body
+		.ribbon.right
+			a(href='https://github.com/trikita/slide') Fork me on Github
+		.container
+			.row.middle-xs.center-xs
+				.col-xs-12.col-md-6
+					.box
+						h1 Slide
+						h2 Make a presentation
+						p (even when you got no time to make a presentation)
+						.row.center-xs.play-button-wrapper
+							.col-xs-8
+								.box
+									a(href='https://play.google.com/store/apps/details?id=trikita.talalarmo&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1')
+										img(alt='Get it on Google Play', src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png')
+									p Also available on #[a(href='https://f-droid.org/wiki/page/trikita.talalarmo') F-Droid] and #[a(href='https://github.com/trikita/talalarmo') Github]
+				.col-xs-12.col-md-6
+					.box
+						img(src='http://placehold.it/480x640', width="480")
+
+		.container
+			.row.middle-xs
+				.col-xs-12.col-md-6
+					.box
+						h1 Write
+						p Content is important.
+						p Use #[a(href='https://en.wikipedia.org/wiki/Takahashi_method') Takahashi method].
+						p Create small focused slides with little text.
+						p Nothing distracts you from writing.
+						p Preview changes as you make them.
+				.col-xs-12.col-md-6.first-md.last-xs
+					.box
+						img(src='http://placehold.it/480x640', width="480")
+		.container
+			.row.middle-xs
+				.col-xs-12.col-md-6
+					.box
+						h1 Emphasize
+						p Text is scaled to fit the slide.
+						p Add powerful `# Headlines`.
+						p Use `*bold*` style to emphasize words.
+						p Or show some `&#9251;&#9251;code();`.
+						p Dot at the beginning of the line escapes all special syntax.
+				.col-xs-12.col-md-6
+					.box
+						img(src='http://placehold.it/480x640', width="480")
+		.container
+			.row.middle-xs
+				.col-xs-12.col-md-6
+					.box
+						h1 Illustrate
+						p Images can be used as backgrounds.
+						p Multiple images per slide can be used.
+						p Any URL can be an image (local photo or a picture from the web).
+						p Customize it by aligning and scaling images.
+				.col-xs-12.col-md-6.first-md.last-xs
+					.box
+						img(src='http://placehold.it/480x640', width="480")
+		.container
+			.row.middle-xs
+				.col-xs-12.col-md-6
+					.box
+						h1 Present
+						p Many bright themes are available
+						//p Or create your own style.
+						p View slides directly on your device 
+						//p Use volume keys or headset key to toggle slides.
+						//p See slides progress
+						p Export slides to PDF and show it to the public
+				.col-xs-12.col-md-6
+					.box
+						img(src='http://placehold.it/480x640', width="480")
+		footer
+			.container
+				.row.center-xs.middle-xs.around-xs
+					.col-xs-8.col-md-4
+						.box.play-button-wrapper
+							a(href='https://play.google.com/store/apps/details?id=trikita.talalarmo&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1')
+								img(alt='Get it on Google Play', src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png')
+			.container
+				.row.center-xs.middle-xs
+					.col-xs-12.col-md-6
+						.row.center-xs.middle-xs
+							.col-xs-12.col-md.first-md.last-xs
+								a(href='http://trikita.co') &copy; Trikita 2016
+							.col-xs-12.col-md
+								a(href='https://github.com/trikita/slide') Github
+							.col-xs-12.col-md
+								a(href='http://trikita.co') More apps
+		!= partial('../_shared/analytics')
+
