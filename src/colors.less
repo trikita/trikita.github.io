@@ -1,0 +1,50 @@
+//
+// Colors
+//
+@purple: #9c27b0;
+@indigo: #3f51b5;
+@orange: #ff9800;
+@blue: #2196f3;
+@green: #4caf50;
+@teal: #009688;
+@gray: #455a64;
+@yellow: #cddc39;
+@red: #e51c23;
+@light-green: #8bc34a;
+@pink: #e91e63;
+@lime: #cddc39;
+@amber: #ffc107;
+@cyan: #00bcd4;
+@deep-orange: #ff5722;
+@brown: #795548;
+@plum: #75507b;
+
+@white: #ffffff;
+@light-gray: #e0e0e0;
+
+.make-background(@c) {
+  .@{c} {
+    background-color: @@c;
+    &:hover, &:active {
+      background-color: lighten(@@c, 10%);
+    }
+  }
+}
+
+.make-background(indigo);
+.make-background(purple);
+.make-background(blue);
+.make-background(teal);
+.make-background(green);
+.make-background(gray);
+.make-background(yellow);
+.make-background(red);
+.make-background(orange);
+.make-background(light-green);
+.make-background(lime);
+.make-background(amber);
+.make-background(pink);
+.make-background(cyan);
+.make-background(deep-orange);
+
+

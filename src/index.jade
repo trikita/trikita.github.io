@@ -6,88 +6,56 @@ html(lang="en")
 		meta(name="description", content="We create simple and intuitive mobile apps, captivating android games and effective tools for developers")
 		link(rel='stylesheet', href='styles.css', type='text/css')
 		link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css")
-		link(href='http://fonts.googleapis.com/css?family=Alegreya+Sans+SC:100,300', rel='stylesheet', type='text/css')
-		link(href='http://fonts.googleapis.com/css?family=Oxygen:100,300', rel='stylesheet', type='text/css')
 	body
-		.container.wrap-width
-			header
-				.logo.inline
-					h1 Trikita
-				| &nbsp;
-				.links.inline
-					a(href="https://twitter.com/trkta").icon-bird
-						i.fa
-					a(href="https://medium.com/@trikita").icon-medium
-						i.fa
-					a(href="https://github.com/trikita").icon-github
-						i.fa
-			.apps
-				ul.grid
-					li
-						a(href="/talalarmo")
-							.app.cyan
-								.descr
-									h3 Talalarmo
-									p Alarm clock
-					li
-						a(href="https://github.com/trikita/kumquat")
-							.app.deep-orange
-								.descr
-									h3 Kumquat
-									p MQTT client
-					li
-						a(href="https://github.com/zserge/anvil")
-							.app.purple
-								.descr
-									h3 Anvil
-									p Reactive UI library for Android
-					li
-						a(href="/slide")
-							.app.orange
-								.descr
-									h3 Slide
-									p Plain text slideshow tool
-					li
-						a(href="http://0xrgb.com")
-							.app.blue
-								.descr
-									h3 Palette
-									p Modern color picker
-					li
-						a(href="https://play.google.com/store/apps/details?id=trikita.obsqr")
-							.app.red
-								.descr
-									h3 Obsqr
-									p QR scanner
-					li
-						a(href="https://play.google.com/store/apps/details?id=trikita.spot")
-							.app.green
-								.descr
-									h3 Spot
-									p Sliding puzzle
-					li
-						a(href="https://play.google.com/store/apps/details?id=trikita.quilt")
-							.app.pink
-								.descr
-									h3 Quilt
-									p Memory game
-					li
-						a(href="https://github.com/trikita/hut")
-							.app.indigo
-								.descr
-									h3 Hut
-									p Ascetic launcher for Android
-
+		.container-900.full-weight
+			header.row
+				.col-xs-12.col-sm-9
+					.box.center-xs.start-sm
+						h1 Trikita
+				.col-xs-12.col-sm-3
+					.box
+						.row
+							mixin social(link, cls, parentClass)
+								.col-xs-2.col-sm-3(class=parentClass)
+									.box.center-xs
+										a(class=cls, href=link)
+											i.fa
+							+social("https://twitter.com/trkta", "icon-bird", "col-xs-offset-3")
+							+social("https://medium.com/#trikita", "icon-medium")
+							+social("https://github.com/#trikita", "icon-github")
+			.row
+				.col-xs-12.about
+					.box
+						p We're #[a(href="https://github.com/zserge") Serge] and #[a(href="https://github.com/krugloid") Anna]. We work together under the name Trikita.
+						p Simplicity is our passion.
+			.row
+				mixin griditem(link, name, desc, color)
+					.col-xs-6.col-sm-4.center-xs.cell
+						a(class=color, href=link).app
+							div
+								h3= name 
+								p= desc 
+				+griditem("/talalarmo", "Talalarmo", "Alarm clock", "cyan")
+				+griditem("https://github.com/trikita/kumquat", "Kumquat", "MQTT client", "deep-orange")
+				+griditem("https://github.com/zserge/anvil", "Anvil", "Reactive UI library for Android", "purple")
+				+griditem("/slide", "Slide", "Plain text slideshow tool", "orange")
+				+griditem("http://0xrgb.com", "Palette", "Modern color picker", "blue")
+				+griditem("https://play.google.com/store/apps/details?id=trikita.obsqr", "Obsqr", "QR scanner", "red")
+				+griditem("https://play.google.com/store/apps/details?id=trikita.spot", "Spot", "Sliding puzzle", "green")
+				+griditem("https://play.google.com/store/apps/details?id=trikita.quilt", "Quilt", "Memory game", "pink")
+				+griditem("https://github.com/trikita/hut", "Hut", "Ascetic launcher for Android", "indigo")
 		footer
-			.wrap-width.full-height
-				.center-vertical
-					p We're #[a(href="https://github.com/zserge") Serge] and #[a(href="https://github.com/krugloid") Anna].
-					p We work together under the name Trikita.
-					p Simplicity is our passion.
-					p &nbsp;
-					p
-						a.email(href='mailto:zaitsev.serge@gmail.com') zaitsev.serge@gmail.com
-					p
-						a.email(href='mailto:kruglik.anna@gmail.com') kruglik.anna@gmail.com
-		!= partial('_shared/analytics')
+			.container-900
+				.row.center-xs
+					.col-xs-12.col-sm-10.col-md-8
+						.box
+							form(action="https://formspree.io/adm.trikita@gmail.com", method="POST")
+								p Let's start working together
+								div
+									input(type="email" name="_replyto" placeholder="Email")
+								div
+									textarea(name="message" placeholder="Tell us about your project")
+								input(type="submit" value="Send")
+													
+							
 
