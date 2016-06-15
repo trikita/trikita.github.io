@@ -1,0 +1,48 @@
+doctype html
+html(lang='en')
+	head
+		title Obsqr | Lightweight QR Code Scanner
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(name="description", content="TODO")
+		link(href='styles.css', rel='stylesheet', type='text/css')
+	body
+		.ribbon.right
+			a(href='https://github.com/trikita/slide') Fork me on Github
+		.container
+			.row.middle-xs.center-xs
+				.col-xs-12.col-sm-6
+					.box
+						img(alt='icon', src='icon.png')
+						h1 obsqr
+						h2 open source QR code scanner
+						p No permissions. No UI. Does one thing.
+						.row
+							.col-xs-8.col-xs-offset-2
+								a(href='https://play.google.com/store/apps/details?id=trikita.obsqr&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1')
+									img(alt='Get it on Google Play', src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png')
+						p Available on #[a(href='https://f-droid.org/wiki/page/trikita.obsqr') F-Droid] and #[a(href='https://github.com/trikita/obsqr') Github]. Made by #[a(href='http://trikita.co') Trikita]
+				.col-xs-12.col-sm-6
+					.box
+						#qr
+						div
+							textarea#text.
+								Try scanning the above QR.
+								Or edit this text to
+								generate another QR code.
+		script(src='qrcode.min.js')
+		script.
+			window.onload = function() {
+				var qr = new QRCode(document.getElementById('qr'), {
+					colorDark : "#34495e",
+					colorLight : "#ffffff",
+				});
+				var editor = document.getElementById('text');
+				editor.focus();
+				var size = Math.min(window.innerWidth/4, window.innerHeight/4);
+				editor.onkeyup = window.onresize = function() {
+					qr.makeCode(editor.value);
+				};
+				qr.makeCode(editor.value);
+			};
+		!= partial('../_shared/analytics')
+

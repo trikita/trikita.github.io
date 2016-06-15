@@ -1,0 +1,41 @@
+@import 'https://fonts.googleapis.com/css?family=Prompt';
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
+@import "flexboxgrid.min.css";
+@import "ribbon.less";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  color: #34495e;
+}
+h1 { font-size: 5.0rem; }
+h2 { font-size: 2.4rem; }
+p, textarea  { font-size: 1.5rem; margin-top: 1rem; margin-bottom: 1rem; }
+img { max-width: 100%; height: auto; }
+textarea {
+  width: 256px;
+  outline: none;
+  min-height: 10rem;
+  padding: 6px 10px;
+  border: 1px solid #d1d1d1;
+  border-radius: 2px;
+}
+
+h1, h2, p, textarea {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+}
+h1 { margin-bottom: 2.4rem; }
+
+#qr {
+  display: flex;
+  justify-content: center;
+}
