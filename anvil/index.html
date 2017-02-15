@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Anvil - reactive views for Android</title>
+  <meta name="description" content="Anvil is a micro library for building reactive views on Android">
+  <meta name="author" content="Serge Zaitsev">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <!--<link rel="icon" type="image/png" href="images/favicon.png">-->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/agate.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+  <style>
+    .api p { font-size: 14pt;}
+    .api pre { margin: 0 0 2em 0;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="one-half column" style="margin-top: 20%">
+        <h1>Anvil</h1>
+        <h4>A micro library for building fast reactive views on Android</h4>
+        <ul>
+          <li>Tiny (4 classes, ~1k LOC)</li>
+          <li>Easy to learn (core API is only 5 functions)</li>
+          <li>Fast (not using Java reflection)</li>
+          <li>Declarative layouts with natural data binding</li>
+          <li>Java 8 and Kotlin-friendly, but also supports JDK6</li>
+          <li>For Android 2.3 or newer</li>
+          <li>Supports XML layouts, but is not limited by using them</li>
+          <li>Inspired by React, Mithril and Incremental DOM</li>
+          <li><a href="https://github.com/zserge/anvil">Open source</a></li>
+        </ul>
+        <p>Anvil renders views incrementally, so if you change your model and
+          update your views - only the fields affected by the model change will be
+          updated.</p>
+        </div>
+      <div class="one-half column" style="margin-top: 20%">
+        <pre><code class="java">public class MainActivity extends Activity {
+    private int count = 0;
+
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
+
+        Anvil.mount(android.R.id.content, () -&gt; {
+            linearLayout(() -&gt; {
+                orientation(LinearLayout.VERTICAL);
+                // Show clicks count
+                textView(() -&gt; {
+                    text("Count: " + count);
+                });
+                // Increase count on every click
+                button(() -&gt; {
+                    text(R.string.btn_text);
+                    onClick((v) -&gt; {
+                        count++;
+                    });
+                });
+            });
+        });
+    }
+}</code></pre>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 3em; padding: 3em 0; background-color: rgba(0, 0, 0, 0.8); color: white;">
+    <div class="container">
+      <h2>Installation</h2>
+      <pre><code>// build.gradle
+repositories {
+    jcenter()
+}
+dependencies {
+    compile 'co.trikita:anvil-sdk15:0.2.0'
+}
+      </code></pre>
+      <p>Or install manually from the sources:</p>
+      <pre><code class="html">
+$ git clone https://github.com/zserge/anvil
+$ cd anvil
+$ ./gradlew build
+$ ./gradlew anvil:publishToMavenLocal
+      </code></pre>
+    </div>
+  </div>
+  <div class="container api" style="padding: 3em 0; ">
+
+    <h2>API</h2>
+
+    <div class="row">
+      <div class="one-half column">
+        <p><b>Anvil.Renderable</b> is a functional interface that one may implement to describe layout structure, style and data bindings.<p>
+      </div>
+      <div class="one-half column">
+        <pre><code class="java">public class MyView implements Anvil.Renderable {
+  public void view() { /* Your layout here */ }
+}
+Anvil.Renderable myView = () -> { /* Or here */ }
+</code></pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="one-half column">
+        <p><b>Anvil.mount(View, Renderable)</b> mounts a renderable
+          layout into a View or a ViewGroup</p>
+      </div>
+      <div class="one-half column">
+        <pre><code class="java">Anvil.mount(mContainerView, new MyView());
+Anvil.mount(mContainerView, () -> {
+   // Your layout here
+});</code></pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="one-half column">
+        <p><b>Anvil.unmount(View)</b> detaches a renderable layout from the View removing all its child views if it's a ViewGroup</p>
+      </div>
+      <div class="one-half column">
+        <pre><code class="java">
+Anvil.unmount(mContainerView);
+
+</code></pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="one-half column">
+        <p><b>Anvil.render()</b> starts a new rendering cycle updating all mounted views. Can be called from background threads.</p>
+      </div>
+      <div class="one-half column">
+        <pre><code class="java">Anvil.mount(mContainer, () -> {
+    // Will show text with the current "s" value
+    textView(() -> { text(s); });
+});
+s = "Foo";
+Anvil.render(); // Will change text to "Foo"</code></pre>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="one-half column">
+        <p><b>Anvil.currentView()</b> returns the view instance which is
+          currently being rendered. Useful in some very rare cases and only
+          inside the Renderable's method view() to get access to the real view
+          and modifying it manually. Often used with <b>init()</b>.</p>
+      </div>
+      <div class="one-half column">
+        <pre><code class="java">EditText mEditText;
+editText(() -> {
+    size(FILL, FIL);
+    init(() -> { // Executed only once
+        mEditText = Anvil.currentView();
+        mEditText.setSelection(mFrom, mTo);
+    });
+    text(mText); // Executed every time text changes
+});</code></pre></div>
+    </div>
+
+    <div class="row">
+      <div class="one-half column">
+        <p><b>RenderableView</b> is a most typical implementation of
+          Anvil.Renderable. Extending this class and overriding its method
+          view() allows to create self-contained reactive components that are
+          mounted and unmounted automatically.</p>
+      </div>
+      <div class="one-half column">
+        <pre><code class="java">public class MyView extends RenderableView {
+    public MyView(Context c) { super(c); }
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        // Initialize your view component
+    }
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        // De-initialize your view component
+    }
+    public void view() { /* your layout here */ }
+}</code></pre></div>
+    </div>
+
+    <div class="row">
+      <div class="one-half column">
+        <p><b>RenderableAdapter</b> class allows to override getCount(), getItem(int) and view(int) methods to create lists where each item is a standalone reactive renderable object.</li>
+      </div>
+      <div class="one-half column">
+        <pre><code class="java">public class MyAdapter extends RenderableAdapter {
+    public int getCount() {
+      return 5;
+    }
+    public Object getItem(int pos) {
+      return "Line #" + pos;
+    }
+    public void view(int pos) {
+        textView(() -&gt; {
+            text(getItem(pos));
+        });
+    }
+}</code></pre></div>
+    </div>
+
+    <div class="row">
+      <div class="one-half column">
+        <p><b>RenderableAdapter.withItems(list, cb)</b> is a shortcut to create simple adapters for the given list of items. <b>cb(index, item)</b> is a lambda that describes the layout and bindings of a certain list item at the given index.</p>
+      </div>
+      <div class="one-half column">
+        <pre><code class="java">List&lt;String&gt; myList = getItems();
+RenderableAdapter a =
+  RenderableAdapter.withItems(myList, (i, item) -> {
+    textView(() -&gt; {
+      if (isImportant(i)) {
+        textColor(importantColor);
+      } else {
+        textColor(normalColor);
+      }
+      text(item.toString());
+    });
+}</code></pre></div>
+    </div>
+
+    <div class="row">
+      <div class="one-half column" style="margin: 15% 0">
+        <h3>Learn more on <a href="https://github.com/zserge/anvil">Github</a>...</h3>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://github.com/zserge/anvil"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
