@@ -19,7 +19,7 @@ html(lang="en")
 			| .gallery { display: flex; flex-flow: row wrap; flex: 1;}
 			| .card { flex: auto; flex-direction: column; width: 300px; display: flex; justify-content: center; align-items: center; margin: 1rem; padding: 2rem; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 12px rgba(0, 0, 0, 0.23);  }
 			| .image { display: flex; flex-direction: column; flex: 1; justify-content: center; }
-			| .image > img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+			| .image img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
 			| .title { font-family: 'Oxygen', sans-serif; margin: 0.7rem 0 0 0; }
 			| p { font-size: 1em; text-align: center; height: 2em; }
 			| .copyright { padding: 2em 0 2em 0; }
@@ -30,57 +30,68 @@ html(lang="en")
 			.gallery
 				.card
 					.image
-						img(src="00_eyemoment_logo.png", alt="Eye Moment logo", title="Eye Moment logo")
+						a(href="http://trikita.co/pixels/00_eyemoment_logo.png")
+							img(src="00_eyemoment_logo.png", alt="Eye Moment logo", title="Eye Moment logo")
 					.title
 						p.grey Eye Moment photo studio
 				.card
 					.image
-						img(src="01_anvil_logo.png", alt="Anvil logo", title="Anvil logo")
+						a(href="http://trikita.co/pixels/01_anvil_logo.png")
+							img(src="01_anvil_logo.png", alt="Anvil logo", title="Anvil logo")
 					.title
 						p.grey Anvil - minimal reactive UI library for Android
 				.card
 					.image
-						img(src="02_slide_icon.png", alt="Slide icon", title="Slide icon")
+						a(href="http://trikita.co/pixels/02_slide_icon.png")
+							img(src="02_slide_icon.png", alt="Slide icon", title="Slide icon")
 					.title
 						p.grey Slide - plain text slideshow tool
 				.card
 					.image
-						img(src="03_slide_promographics.png", alt="Slide promo graphics", title="Slide promo graphics")
+						a(href="http://trikita.co/pixels/03_slide_promographics.png")
+							img(src="03_slide_promographics.png", alt="Slide promo graphics", title="Slide promo graphics")
 					.title
 						p.grey Slide promo graphics
 				.card
 					.image
-						img(src="04_hush_icon.png", alt="Hush icon", title="Hush icon")
+						a(href="http://trikita.co/pixels/04_hush_icon.png")
+							img(src="04_hush_icon.png", alt="Hush icon", title="Hush icon")
 					.title
 						p.grey Hush - mobile loudness meter
 				.card
 					.image
-						img(src="05_hush_promographics.png", alt="Hush promo graphics", title="Hush promo graphics")
+						a(href="http://trikita.co/pixels/05_hush_promographics.png")
+							img(src="05_hush_promographics.png", alt="Hush promo graphics", title="Hush promo graphics")
 					.title
 						p.grey Hush promo graphics
 				.card
 					.image
-						img(src="06_obsqr_icon.png", alt="Obsqr icon", title="Obsqr icon")
+						a(href="http://trikita.co/pixels/06_obsqr_icon.png")
+							img(src="06_obsqr_icon.png", alt="Obsqr icon", title="Obsqr icon")
 					.title
 						p.grey Obsqr - QR code scanner
 				.card
 					.image
-						img(src="07_obsqr_promographics.png", alt="Obsqr promo graphics", title="Obsqr promo graphics")
+						a(href="http://trikita.co/pixels/07_obsqr_promographics.png")
+							img(src="07_obsqr_promographics.png", alt="Obsqr promo graphics", title="Obsqr promo graphics")
 					.title
 						p.grey Obsqr promo graphics
 				.card
 					.image
-						img(src="08_memory_game_icon.png", alt="Memory game icon", title="Memory game icon")
+						a(href="http://trikita.co/pixels/08_memory_game_icon.png")
+							img(src="08_memory_game_icon.png", alt="Memory game icon", title="Memory game icon")
 					.title
 						p.grey Memory game about matching tile pairs
 				.card
 					.image
-						img(src="09_talalarmo_promographics.png", alt="Talalarmo promo graphics", title="Talalarmo promo graphics")
+						a(href="http://trikita.co/pixels/09_talalarmo_promographics.png")
+							img(src="09_talalarmo_promographics.png", alt="Talalarmo promo graphics", title="Talalarmo promo graphics")
 					.title
 						p.grey Promo graphics of Talalarmo Alarm Clock
 				.card
 					.image
-						img(src="10_scherzo_ui_prototype.png", alt="Scherzo UI prototype", title="Scherzo UI prototype")
+						a(href="http://trikita.co/pixels/10_scherzo_ui_prototype.png")
+							img(src="10_scherzo_ui_prototype.png", alt="Scherzo UI prototype", title="Scherzo UI prototype")
 					.title
 						p.grey Scherzo - lightweight virtual piano (UI prototype)
 			.copyright.center
