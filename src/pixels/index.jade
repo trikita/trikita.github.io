@@ -16,24 +16,73 @@ html(lang="en")
 			| .center { text-align: center; }
 			| .grey { color: rgba(0, 0, 0, 0.54); }
 			| .plain {text-decoration: none; font-family: 'Alegreya Sans SC', sans-serif;}
-			| .gallery { font-size: 0; display: flex; flex-flow: row wrap; flex: 1;}
-			| .card { flex: auto; width: 300px; display: flex; justify-content: center; align-items: center; margin: 1rem; padding: 2rem; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 12px rgba(0, 0, 0, 0.23);  }
+			| .gallery { display: flex; flex-flow: row wrap; flex: 1;}
+			| .card { flex: auto; flex-direction: column; width: 300px; display: flex; justify-content: center; align-items: center; margin: 1rem; padding: 2rem; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.16), 0 3px 12px rgba(0, 0, 0, 0.23);  }
+			| .image { display: flex; flex-direction: column; flex: 1; justify-content: center; }
 			| .image > img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+			| .title { font-family: 'Oxygen', sans-serif; margin: 0.7rem 0 0 0; }
+			| p { font-size: 1em; text-align: center; height: 2em; }
 			| .copyright { padding: 2em 0 2em 0; }
 	body
-		- var reExt = new RegExp('\.(png|gif|jpg|jpeg)$');
-		- function altname(s) {
-		-   return s.replace(/^\d\d_/, '').replace(/_/g, ' ').replace(reExt, '');
-		- }
 		.container.wrap-width
 			h1.center
 				a.plain.grey(href="http://trikita.co/") Trikita Pixels
 			.gallery
-				each f in public.pixels._contents
-					if f.toString().match(reExt)
-						.card
-							.image
-								img(src="#{f}", alt="#{altname(f)}", title="#{altname(f)}")
+				.card
+					.image
+						img(src="00_eyemoment_logo.png", alt="Eye Moment logo", title="Eye Moment logo")
+					.title
+						p.grey Eye Moment photo studio
+				.card
+					.image
+						img(src="01_anvil_logo.png", alt="Anvil logo", title="Anvil logo")
+					.title
+						p.grey Anvil - minimal reactive UI library for Android
+				.card
+					.image
+						img(src="02_slide_icon.png", alt="Slide icon", title="Slide icon")
+					.title
+						p.grey Slide - plain text slideshow tool
+				.card
+					.image
+						img(src="03_slide_promographics.png", alt="Slide promo graphics", title="Slide promo graphics")
+					.title
+						p.grey Slide promo graphics
+				.card
+					.image
+						img(src="04_hush_icon.png", alt="Hush icon", title="Hush icon")
+					.title
+						p.grey Hush - mobile loudness meter
+				.card
+					.image
+						img(src="05_hush_promographics.png", alt="Hush promo graphics", title="Hush promo graphics")
+					.title
+						p.grey Hush promo graphics
+				.card
+					.image
+						img(src="06_obsqr_icon.png", alt="Obsqr icon", title="Obsqr icon")
+					.title
+						p.grey Obsqr - QR code scanner
+				.card
+					.image
+						img(src="07_obsqr_promographics.png", alt="Obsqr promo graphics", title="Obsqr promo graphics")
+					.title
+						p.grey Obsqr promo graphics
+				.card
+					.image
+						img(src="08_memory_game_icon.png", alt="Memory game icon", title="Memory game icon")
+					.title
+						p.grey Memory game about matching tile pairs
+				.card
+					.image
+						img(src="09_talalarmo_promographics.png", alt="Talalarmo promo graphics", title="Talalarmo promo graphics")
+					.title
+						p.grey Promo graphics of Talalarmo Alarm Clock
+				.card
+					.image
+						img(src="10_scherzo_ui_prototype.png", alt="Scherzo UI prototype", title="Scherzo UI prototype")
+					.title
+						p.grey Scherzo - lightweight virtual piano (UI prototype)
 			.copyright.center
-				a.plain.grey(href="http://trikita.co/") &copy; Trikita 2016
+				a.plain.grey(href="http://trikita.co/") &copy; Trikita 2017
 		!= partial('../_shared/analytics')
